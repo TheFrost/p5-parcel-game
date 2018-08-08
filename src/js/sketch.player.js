@@ -31,17 +31,21 @@ export default class SketchPlayer extends Sketch {
   setup() { this.isReady = true; }
   
   draw() {
-    // if (this.areAssetsReady) this.renderBackground();
 
-    if (this.isRenderingShape) this.renderShape();
+    if (!this.areAssetsReady) return;
 
+    if (this.isRenderingShape) { 
+      this.renderBackground();
+      this.renderShape();
+    }
+    
     if (this.isRedrawingBuffer) this.redrawBuffer();
-
+    
     // if game over prevent play logic
     if (this.gameOver) return;
-
+    
     if (this.isDrawing) this.drawBrush();
-
+    
     if (this.isTheFirstPhase) this.setupPixels();
 
   }
@@ -158,6 +162,10 @@ export default class SketchPlayer extends Sketch {
       this.spriteMedia,
       this.bgGame.xDraw,
       this.bgGame.yDraw,
+      this.bgGame.w,
+      this.bgGame.h,
+      this.bgGame.x,
+      this.bgGame.y,
       this.bgGame.w,
       this.bgGame.h
     );
