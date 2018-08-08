@@ -36,8 +36,9 @@ export default class SketchUI extends Sketch {
 
   draw() {
     if (!this.isReady) return;
+    this.p5.clear();
 
-    this.renderBackground();
+    // this.renderBackground();
     this.renderBarPoints();
     this.renderTimeBar();
 
@@ -65,16 +66,6 @@ export default class SketchUI extends Sketch {
   }
 
   setupAssets() {
-    // bg game --------------------------------
-    const bgGame = this.tilesetData.frames['bg.jpg'];
-    this.bgGame = {
-      xDraw: 0,
-      yDraw: 0,
-      wDraw: bgGame.frame.w*this.GAME_SCALE,
-      hDraw: bgGame.frame.h*this.GAME_SCALE,
-      ...bgGame.frame
-    };
-
     // bar points -----------------------------
     const barPoints = this.tilesetData.frames['points-bar.png'];
     this.barPoints = {
