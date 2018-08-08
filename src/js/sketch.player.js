@@ -18,6 +18,7 @@ export default class SketchPlayer extends Sketch {
     this.isRenderingShape = true;
     this.isRedrawingBuffer = false;
     this.isReady = false;
+    this.areAssetsReady = false;
 
     this.bindEvents();
   }
@@ -30,15 +31,21 @@ export default class SketchPlayer extends Sketch {
   setup() { this.isReady = true; }
   
   draw() {
-    if (this.isRenderingShape) this.renderShape();
 
+    if (!this.areAssetsReady) return;
+
+    if (this.isRenderingShape) { 
+      this.renderBackground();
+      this.renderShape();
+    }
+    
     if (this.isRedrawingBuffer) this.redrawBuffer();
-
+    
     // if game over prevent play logic
     if (this.gameOver) return;
-
+    
     if (this.isDrawing) this.drawBrush();
-
+    
     if (this.isTheFirstPhase) this.setupPixels();
 
   }
@@ -64,24 +71,29 @@ export default class SketchPlayer extends Sketch {
   //#region Custom methods
   bindEvents() {
     this.pubsub.suscribe('gameOver', () => this.gameOver = true);
-    this.pubsub.suscribe('uiSpriteReady', this.setupBrushData.bind(this));
+    this.pubsub.suscribe('uiSpriteReady', this.setupAssets.bind(this));
   }
 
-  setupBrushData({ spriteMedia, tilesetData }) {
-    this.brush = spriteMedia;
-    this.brushTileset = tilesetData.frames['brush-cheese.png'];
+  setupAssets({ spriteMedia, tilesetData }) {
+    this.spriteMedia = spriteMedia;
 
-    this.setupBrush();
-  }
-
-  setupBrush() {
-    const size = 10;
-
+    // brush
+    const brushTileset = tilesetData.frames['brush-cheese.png'];
     this.brushData = {
-      wDraw: size,
-      hDraw: size,
-      ...this.brushTileset.frame
+      wDraw: 10,
+      hDraw: 10,
+      ...brushTileset.frame
     };
+
+    // bg game --------------------------------
+    const bgGame = tilesetData.frames['bg.jpg'];
+    this.bgGame = {
+      xDraw: 0,
+      yDraw: 0,
+      ...bgGame.frame
+    };
+
+    this.areAssetsReady = true;
   }
 
   drawBrush() {
@@ -97,7 +109,7 @@ export default class SketchPlayer extends Sketch {
       const y = this.lastPoint.y + (Math.cos(angle) * i) - 25;
       
       this.buffer.image(
-        this.brush,
+        this.spriteMedia,
         (x+20)/this.GAME_SCALE, 
         (y+20)/this.GAME_SCALE,
         this.brushData.wDraw,
@@ -140,6 +152,23 @@ export default class SketchPlayer extends Sketch {
     );
 
     this.isRenderingShape = false;
+  }
+
+  renderBackground() {
+    const { p5, buffer } = this;
+
+    buffer.imageMode(p5.CORNER);
+    buffer.image(
+      this.spriteMedia,
+      this.bgGame.xDraw,
+      this.bgGame.yDraw,
+      this.bgGame.w,
+      this.bgGame.h,
+      this.bgGame.x,
+      this.bgGame.y,
+      this.bgGame.w,
+      this.bgGame.h
+    );
   }
 
   updateShape() {
