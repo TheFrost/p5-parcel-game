@@ -1,5 +1,6 @@
 import p5 from 'p5';
 import PubSub from './pubsub';
+import { debounce } from 'underscore';
 
 export default class Sketch {
   constructor(config) {
@@ -33,7 +34,7 @@ export default class Sketch {
       s.touchEnded = this.pointerRelease.bind(this);
       s.mousePressed = this.pointerStart.bind(this);
       s.mouseReleased = this.pointerRelease.bind(this);
-      s.windowResized = this.windowResize.bind(this);
+      s.windowResized = debounce(this.windowResize.bind(this), 100);
       return s;
     }, this.sketch.parent);
   }
