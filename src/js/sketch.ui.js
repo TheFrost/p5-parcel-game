@@ -27,6 +27,7 @@ export default class SketchUI extends Sketch {
   }
   
   setup() { 
+    this.p5.noCursor();
     this.setupAssets();
     this.publishResources();
     store.dispatch({type: 'SET_UI_SKETCH_READY'});
@@ -121,6 +122,14 @@ export default class SketchUI extends Sketch {
       hDraw: timerClock.frame.h*this.GAME_SCALE,
       ...timerClock.frame
     };
+
+    // chester hand
+    const pointer = this.tilesetData.frames['hand-pointer.png'];
+    this.pointer = {
+      wDraw: pointer.frame.w*this.GAME_SCALE,
+      hDraw: pointer.frame.h*this.GAME_SCALE,
+      ...pointer.frame
+    }
   }
 
   getTimeFactor() {
@@ -143,8 +152,26 @@ export default class SketchUI extends Sketch {
 
   renderUI() {
     this.p5.clear();
+    this.renderPointer();
     this.renderBarPoints();
     this.renderTimeBar();
+  }
+
+  renderPointer() {
+    const { p5 } = this;
+
+    p5.imageMode(p5.CORNER);
+    p5.image(
+      this.spriteMedia,
+      p5.mouseX-15,
+      p5.mouseY-20,
+      this.pointer.wDraw,
+      this.pointer.hDraw,
+      this.pointer.x,
+      this.pointer.y,
+      this.pointer.w,
+      this.pointer.h
+    );
   }
 
   renderBarPoints() {

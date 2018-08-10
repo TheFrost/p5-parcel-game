@@ -76,8 +76,8 @@ export default class SketchPlayer extends Sketch {
     // brush
     const brushTileset = tilesetData.frames['brush-cheese.png'];
     this.brushData = {
-      wDraw: 10,
-      hDraw: 10,
+      wDraw: 12,
+      hDraw: 12,
       ...brushTileset.frame
     };
 
