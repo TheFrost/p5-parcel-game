@@ -163,8 +163,8 @@ export default class SketchUI extends Sketch {
     p5.imageMode(p5.CORNER);
     p5.image(
       this.spriteMedia,
-      p5.mouseX-15,
-      p5.mouseY-20,
+      p5.mouseX-9*this.GAME_SCALE,
+      p5.mouseY-10*this.GAME_SCALE,
       this.pointer.wDraw,
       this.pointer.hDraw,
       this.pointer.x,
