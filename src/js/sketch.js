@@ -60,7 +60,6 @@ export default class Sketch {
       this.buffer.pixelDensity(1);
     } 
 
-    
     this.windowResize();
 
     this.setup();
@@ -89,6 +88,8 @@ export default class Sketch {
     this.resize();
     this.p5.resizeCanvas(this.GAME_WIDTH, this.GAME_HEIGHT);
   }
+
+  setup() {}
 
   resize() {}
 }

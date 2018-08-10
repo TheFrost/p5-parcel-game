@@ -1,22 +1,21 @@
 import Sketch from './sketch';
 import { pad } from './utils';
+import store from './store';
 
 export default class SketchUI extends Sketch {
   constructor(config) {
     super(config);
 
+    // setup store basics
+    store.dispatch({
+      type: 'SET_SCORE_FACTORS',
+      scoreFactor: 10,
+      level: config.gameLevel
+    });
+
     this.timer = config.timeLimit || 60; // in seconds
     this.startTime = Date.now();
     this.timeFactor = 0;
-
-    this.score = 0;
-    this.finalScore = 0;
-    this.scorePerShape = 10;
-    this.gameLevel = config.gameLevel;
-
-    //flags
-    this.isReady = false;
-    this.gameOver = false;
 
     this.init();
   }
@@ -26,26 +25,29 @@ export default class SketchUI extends Sketch {
     this.spriteMedia = this.p5.loadImage('resources/cheetos-ui.png');
     this.tilesetData = this.p5.loadJSON('resources/cheetos-ui.json');
   }
-
+  
   setup() { 
     this.setupAssets();
     this.publishResources();
-
-    this.isReady = true;
+    store.dispatch({type: 'SET_UI_SKETCH_READY'});
   }
 
   draw() {
-    if (!this.isReady) return;
-    this.p5.clear();
+    const state = store.getState();
 
-    // this.renderBackground();
-    this.renderBarPoints();
-    this.renderTimeBar();
-
-    // validate time factor limit
-    if (this.gameOver) return;
-    this.timeFactor = this.getTimeFactor();
-    if (this.timeFactor > 1) return this.triggerFinishGame();
+    switch(state.gameState) {
+      case 'LOADING':
+        console.log('loading state');
+        return;
+      case 'PLAY':
+        this.renderUI();
+        this.validateTimer();
+        return;
+      case 'GAME_OVER':
+        this.renderUI();
+        return;
+      default: return;
+    }
   }
 
   resize() { this.setupAssets(); }
@@ -57,7 +59,11 @@ export default class SketchUI extends Sketch {
   }
 
   bindEvents() {
-    this.pubsub.suscribe('completedDraw', this.onCompletedDraw, this);
+    this.pubsub.suscribe('completedDraw', this.onCompleteDraw, this);
+  }
+
+  onCompleteDraw() {
+    store.dispatch({type: 'UP_SCORE'});
   }
 
   publishResources() {
@@ -117,38 +123,28 @@ export default class SketchUI extends Sketch {
     };
   }
 
-  onCompletedDraw() {
-    this.score += this.scorePerShape;
-    console.log('score:', this.score);
-  }
-
   getTimeFactor() {
     return ((Date.now() - this.startTime) / 1000) / this.timer;
   }
 
-  triggerFinishGame() {
-    this.pubsub.publish('gameOver');
-    this.gameOver = true;
-    this.finalScore = this.score * this.gameLevel;
-    console.log('multiplier:', this.gameLevel);
-    console.log('finalScore:', this.finalScore);
+  validateTimer() {
+    this.timeFactor = this.getTimeFactor();
+    if (this.timeFactor > 1) this.triggerFinishGame();
   }
 
-  renderBackground() {
-    const { p5 } = this;
+  triggerFinishGame() {
+    this.pubsub.publish('gameOver');
+    store.dispatch({type: 'CALC_FINAL_SCORE'});
+    store.dispatch({
+      type: 'SET_GAME_STATE',
+      gameState: 'GAME_OVER'
+    });
+  }
 
-    p5.imageMode(p5.CORNER);
-    p5.image(
-      this.spriteMedia,
-      this.bgGame.xDraw,
-      this.bgGame.yDraw,
-      this.bgGame.wDraw,
-      this.bgGame.hDraw,
-      this.bgGame.x,
-      this.bgGame.y,
-      this.bgGame.w,
-      this.bgGame.h
-    );
+  renderUI() {
+    this.p5.clear();
+    this.renderBarPoints();
+    this.renderTimeBar();
   }
 
   renderBarPoints() {
@@ -232,6 +228,7 @@ export default class SketchUI extends Sketch {
 
   renderPointsInfo() {
     const { p5 } = this;
+    const state = store.getState();
 
     // format
     p5.fill(255);
@@ -242,11 +239,11 @@ export default class SketchUI extends Sketch {
 
     // points
     p5.textAlign(p5.LEFT, p5.CENTER);
-    p5.text(pad(this.score, 4), this.GAME_WIDTH/2 - this.barPoints.wDraw/2 + this.barPoints.wDraw*0.15, 61*this.GAME_SCALE);
+    p5.text(pad(state.score, 4), this.GAME_WIDTH/2 - this.barPoints.wDraw/2 + this.barPoints.wDraw*0.15, 61*this.GAME_SCALE);
     
     // multiplier
     p5.textAlign(p5.RIGHT, p5.CENTER);
-    p5.text(`x${this.gameLevel}`, this.GAME_WIDTH/2 + this.barPoints.wDraw/2 - this.barPoints.wDraw*0.15, 61*this.GAME_SCALE);
+    p5.text(`x${state.level}`, this.GAME_WIDTH/2 + this.barPoints.wDraw/2 - this.barPoints.wDraw*0.15, 61*this.GAME_SCALE);
   }
   //#endregion Custom methods
 };

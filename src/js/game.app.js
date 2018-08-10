@@ -1,6 +1,7 @@
 import SketchPlayer from './sketch.player';
 import SketchUI from './sketch.ui';
 import PubSub from './pubsub';
+import store from './store';
 
 export default class GameApp {
   constructor(config = {}) {
@@ -33,11 +34,20 @@ export default class GameApp {
   }
 
   draw() {
+    const state = store.getState();
+
     if (this.gameOver) return;
 
     this.requestId = window.requestAnimationFrame(this.draw.bind(this));
 
-    if (this.sketchPlayer.isReady && this.sketchUi.isReady) {
+    if (state.playerSketchReady && state.uiSketchReady) {
+      if (state.gameState !== 'PLAY') {
+        store.dispatch({
+          type: 'SET_GAME_STATE',
+          gameState: 'PLAY'
+        });
+      }
+
       this.sketchPlayer.draw();
       this.sketchUi.draw();
     }

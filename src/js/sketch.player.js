@@ -1,4 +1,5 @@
 import Sketch from './sketch';
+import store from './store';
 import { distanceBetween, angleBetween, getPixelCounter } from './utils';
 
 export default class SketchPlayer extends Sketch {
@@ -6,19 +7,17 @@ export default class SketchPlayer extends Sketch {
     super(config);
 
     this.completeShapePixels = 0;
-    this.isTheFirstPhase = true;
     this.minProgress = 80;
     
     this.brushPos = null;
     this.lastPoint = null;
-
+    
     // flags
     this.gameOver = false;
     this.isDrawing = false;
+    this.isTheFirstPhase = true;
     this.isRenderingShape = true;
     this.isRedrawingBuffer = false;
-    this.isReady = false;
-    this.areAssetsReady = false;
 
     this.bindEvents();
   }
@@ -27,40 +26,38 @@ export default class SketchPlayer extends Sketch {
   preload() {
     this.shape = this.p5.loadImage('resources/shape.png');
   }
-
-  setup() { this.isReady = true; }
   
   draw() {
+    const state = store.getState();
 
-    if (!this.areAssetsReady) return;
-
-    if (this.isRenderingShape) { 
-      this.renderBackground();
-      this.renderShape();
+    switch(state.gameState) {
+      case 'PLAY':
+        this.renderScene();
+        this.renderUserPlay();
+        return;
+      case 'GAME_OVER':
+        this.renderScene();
+        return;
+      default: return;
     }
-    
-    if (this.isRedrawingBuffer) this.redrawBuffer();
-    
-    // if game over prevent play logic
-    if (this.gameOver) return;
-    
-    if (this.isDrawing) this.drawBrush();
-    
-    if (this.isTheFirstPhase) this.setupPixels();
-
   }
   //#endregion p5.js main methods
   
   //#region p5.js event handlers
   pointerStart(e) {
     e.preventDefault();
-    if (this.gameOver) return;
+    
+    const state = store.getState();
+    if (state.gameState === 'GAME_OVER') return;
+
     this.isDrawing = true;
     this.lastPoint = { x: this.p5.mouseX, y: this.p5.mouseY };
   }
 
   pointerRelease() {
-    if (this.gameOver) return;
+    const state = store.getState();
+    if (state.gameState === 'GAME_OVER') return;
+
     this.isDrawing = false;
     this.validatePixels();
   }
@@ -70,7 +67,6 @@ export default class SketchPlayer extends Sketch {
 
   //#region Custom methods
   bindEvents() {
-    this.pubsub.suscribe('gameOver', () => this.gameOver = true);
     this.pubsub.suscribe('uiSpriteReady', this.setupAssets.bind(this));
   }
 
@@ -93,7 +89,7 @@ export default class SketchPlayer extends Sketch {
       ...bgGame.frame
     };
 
-    this.areAssetsReady = true;
+    store.dispatch({type: 'SET_PLAYER_SKETCH_READY'});
   }
 
   drawBrush() {
@@ -124,6 +120,21 @@ export default class SketchPlayer extends Sketch {
     this.renderBuffer();
 
     this.lastPoint = currentPoint;
+  }
+
+  renderUserPlay() {
+    if (this.isDrawing) this.drawBrush();
+    // if (this.isTheFirstPhase) this.setupPixels();
+  }
+
+  renderScene() {
+    if (this.isRenderingShape) { 
+      this.renderBackground();
+      this.renderShape();
+      this.setupPixels()
+    }
+    
+    if (this.isRedrawingBuffer) this.redrawBuffer();
   }
 
   renderBuffer() {
