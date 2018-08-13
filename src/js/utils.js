@@ -62,3 +62,8 @@ export const pad = (number, length) => {
   }
   return str;
 }
+
+/**
+ * Detect mobile agent smarthphones
+ */
+export const isSmarthphone = () => window.innerWidth < 768 && /iPhone|iPod|Android/i.test(navigator.userAgent);

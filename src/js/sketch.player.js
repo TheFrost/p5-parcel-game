@@ -1,13 +1,21 @@
 import Sketch from './sketch';
 import store from './store';
-import { distanceBetween, angleBetween, getPixelCounter } from './utils';
+import { 
+  distanceBetween, 
+  angleBetween, 
+  getPixelCounter,
+  isSmarthphone
+} from './utils';
 
 export default class SketchPlayer extends Sketch {
   constructor(config) {
     super(config);
 
+    const isSmarthphoneFlag = isSmarthphone();
+
+    this.brushSize = isSmarthphoneFlag ? 20 : 13;
+    this.minProgress = isSmarthphoneFlag ? 90 : 80;
     this.completeShapePixels = 0;
-    this.minProgress = 80;
     
     this.brushPos = null;
     this.lastPoint = null;
@@ -76,8 +84,8 @@ export default class SketchPlayer extends Sketch {
     // brush
     const brushTileset = tilesetData.frames['brush-cheese.png'];
     this.brushData = {
-      wDraw: 12,
-      hDraw: 12,
+      wDraw: this.brushSize,
+      hDraw: this.brushSize,
       ...brushTileset.frame
     };
 
