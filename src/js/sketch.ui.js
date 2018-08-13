@@ -13,7 +13,7 @@ export default class SketchUI extends Sketch {
       level: config.gameLevel
     });
 
-    this.timer = config.timeLimit || 60; // in seconds
+    this.timer = config.timeLimit || 3; // in seconds
     this.startTime = Date.now();
     this.timeFactor = 0;
 
@@ -142,11 +142,16 @@ export default class SketchUI extends Sketch {
   }
 
   triggerFinishGame() {
-    this.pubsub.publish('gameOver');
     store.dispatch({type: 'CALC_FINAL_SCORE'});
     store.dispatch({
       type: 'SET_GAME_STATE',
       gameState: 'GAME_OVER'
+    });
+
+    const state = store.getState();
+    this.pubsub.publish('gameOver', {
+      log: 'log',
+      score: state.finalScore
     });
   }
 

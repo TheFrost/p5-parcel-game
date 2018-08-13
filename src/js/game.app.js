@@ -57,4 +57,7 @@ export default class GameApp {
     this.gameOver = true;
     window.cancelAnimationFrame(this.requestId);
   }
+
+  // global event handler method of game
+  on(event, callback) { this.pubsub.suscribe(event, callback); }
 }
