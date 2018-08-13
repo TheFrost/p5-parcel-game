@@ -56,7 +56,7 @@ export default class SketchPlayer extends Sketch {
     e.preventDefault();
     
     const state = store.getState();
-    if (state.gameState === 'GAME_OVER') return;
+    if (state.gameState !== 'PLAY') return;
 
     this.isDrawing = true;
     this.lastPoint = { x: this.p5.mouseX, y: this.p5.mouseY };
@@ -64,7 +64,7 @@ export default class SketchPlayer extends Sketch {
 
   pointerRelease() {
     const state = store.getState();
-    if (state.gameState === 'GAME_OVER') return;
+    if (state.gameState !== 'PLAY') return;
 
     this.isDrawing = false;
     this.validatePixels();

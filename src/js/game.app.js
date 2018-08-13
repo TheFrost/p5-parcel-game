@@ -8,26 +8,28 @@ export default class GameApp {
     this.config = config;
     this.pubsub = new PubSub();
 
-    // flags
-    this.gameOver = false;
-
-    this.buildBaseMarkup();
+    this.init();
   }
 
-  init(gameLevel) {
-    this.sketchPlayer = new SketchPlayer({
-      setupBuffer: true,
-      parent: 'sketch-player',
-      ...this.config
+  start(gameLevel) {
+    // setup store basics
+    store.dispatch({
+      type: 'SET_SCORE_FACTORS',
+      scoreFactor: 10,
+      level: gameLevel
     });
-    
-    this.sketchUi = new SketchUI({
-      parent: 'sketch-ui',
-      gameLevel: gameLevel,
-      ...this.config
+
+    store.dispatch({
+      type: 'SET_GAME_STATE',
+      gameState: 'PLAY'
     });
-    
-    this.bindEvents();
+
+    this.pubsub.publish('startGame');
+  }
+
+  init() {
+    this.buildBaseMarkup();
+    this.setupSketches();
     this.draw();
   }
 
@@ -67,33 +69,54 @@ export default class GameApp {
     main.appendChild(fragment);
   }
 
-  bindEvents() {
-    this.pubsub.suscribe('gameOver', this.stopDraw, this);
+  setupSketches() {
+    this.sketchPlayer = new SketchPlayer({
+      setupBuffer: true,
+      parent: 'sketch-player',
+      ...this.config
+    });
+    
+    this.sketchUi = new SketchUI({
+      parent: 'sketch-ui',
+      ...this.config
+    });
   }
-
+  
   draw() {
-    const state = store.getState();
-
-    if (this.gameOver) return;
-
     this.requestId = window.requestAnimationFrame(this.draw.bind(this));
-
+    
+    const state = store.getState();
     if (state.playerSketchReady && state.uiSketchReady) {
-      if (state.gameState !== 'PLAY') {
-        store.dispatch({
-          type: 'SET_GAME_STATE',
-          gameState: 'PLAY'
-        });
+      switch(state.gameState) {
+        case 'LOADING':
+          this.publishLoaded();
+          return;
+        case 'PLAY':
+          this.sketchDraw();
+          return;
+        case 'GAME_OVER':
+          this.stopDraw();
+        default: return;
       }
-
-      this.sketchPlayer.draw();
-      this.sketchUi.draw();
     }
   }
 
   stopDraw() {
-    this.gameOver = true;
     window.cancelAnimationFrame(this.requestId);
+  }
+
+  sketchDraw() {
+    this.sketchPlayer.draw();
+    this.sketchUi.draw();
+  }
+
+  publishLoaded() {
+    store.dispatch({
+      type: 'SET_GAME_STATE',
+      gameState: 'LOADED'
+    });
+
+    this.pubsub.publish('gameLoaded');
   }
 
   // global event handler method of game

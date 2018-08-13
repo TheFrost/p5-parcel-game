@@ -6,15 +6,7 @@ export default class SketchUI extends Sketch {
   constructor(config) {
     super(config);
 
-    // setup store basics
-    store.dispatch({
-      type: 'SET_SCORE_FACTORS',
-      scoreFactor: 10,
-      level: config.gameLevel
-    });
-
-    this.timer = config.timeLimit || 3; // in seconds
-    this.startTime = Date.now();
+    this.timer = config.timeLimit || 60; // in seconds
     this.timeFactor = 0;
 
     this.init();
@@ -37,9 +29,6 @@ export default class SketchUI extends Sketch {
     const state = store.getState();
 
     switch(state.gameState) {
-      case 'LOADING':
-        console.log('loading state');
-        return;
       case 'PLAY':
         this.renderUI();
         this.validateTimer();
@@ -61,6 +50,11 @@ export default class SketchUI extends Sketch {
 
   bindEvents() {
     this.pubsub.suscribe('completedDraw', this.onCompleteDraw, this);
+    this.pubsub.suscribe('startGame', this.onStartGame, this);
+  }
+
+  onStartGame() {
+    this.startTime = Date.now();
   }
 
   onCompleteDraw() {
