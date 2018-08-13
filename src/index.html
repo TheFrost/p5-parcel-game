@@ -16,11 +16,8 @@
       background-color: #FF8C00;
     }
     * { box-sizing: border-box }
-    canvas {
-      display: block;
-      border: 3px solid white;
-    }
-    .sketch__wrapper {
+
+    #sketch-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -28,28 +25,14 @@
       height: calc(100% - 56px);
     }
     @media (min-height: 768px) {
-      .sketch__wrapper {
+      #sketch-wrapper {
         height: 100%;
       }
-    }
-    .sketch__container {
-      position: relative;
-    }
-    .sketch__item.up {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
     }
   </style>
 </head>
 <body>
-  <div class="sketch__wrapper">
-    <div class="sketch__container">
-      <div class="sketch__item" id="sketch-player"></div>
-      <div class="sketch__item up" id="sketch-ui"></div>
-    </div>
-  </div>
+  <div id="sketch-wrapper"></div>
 
   <script src="index.js"></script>
 </body>

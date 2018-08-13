@@ -4,7 +4,11 @@ if(module.hot)module.hot.dispose(()=>window.location.reload());
 
 import GameApp from './js/game.app';
 
-const app = new GameApp({ w: 360, h: 640 }); // setup base dimentions. Default 360x640
+const app = new GameApp({ 
+  w: 360, 
+  h: 640,
+  containerId: 'sketch-wrapper'
+}); // setup base dimentions. Default 360x640
 app.init(2); // start with level ( multiplier ) game. Deafault 1
 
 // example gameOver handler and args destructuring

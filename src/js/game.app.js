@@ -10,6 +10,8 @@ export default class GameApp {
 
     // flags
     this.gameOver = false;
+
+    this.buildBaseMarkup();
   }
 
   init(gameLevel) {
@@ -27,6 +29,42 @@ export default class GameApp {
     
     this.bindEvents();
     this.draw();
+  }
+
+  buildBaseMarkup() {
+    const fragment = document.createDocumentFragment();
+
+    // validate container configuration
+    const { containerId } = this.config;
+    const mainSelector = containerId ? document.getElementById(containerId) : null;
+    const main = mainSelector || document.body;
+
+    // container node
+    const containerNode = document.createElement('div');
+    Object.assign(containerNode.style, {
+      position: 'relative'
+    });
+    
+    // player node
+    const playerNode = document.createElement('div');
+    playerNode.id = 'sketch-player';
+    
+    // ui node
+    const uiNode = document.createElement('div');
+    uiNode.id = 'sketch-ui';
+    Object.assign(uiNode.style, {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      zIndex: '10'
+    });
+
+    // build
+    containerNode.appendChild(playerNode);
+    containerNode.appendChild(uiNode);
+    fragment.appendChild(containerNode);
+
+    main.appendChild(fragment);
   }
 
   bindEvents() {
