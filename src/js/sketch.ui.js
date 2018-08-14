@@ -1,6 +1,7 @@
 import Sketch from './sketch';
 import { pad } from './utils';
 import store from './store';
+import { Tween, Easing } from '@tweenjs/tween.js';
 
 export default class SketchUI extends Sketch {
   constructor(config) {
@@ -8,6 +9,12 @@ export default class SketchUI extends Sketch {
 
     this.timer = config.timeLimit || 60; // in seconds
     this.timeFactor = 0;
+    this.currentSecond = 0;
+
+    // transform facors for tweening
+    this.clockTransform = { scale: 1 };
+    this.cheeseTransform = { scale: 1 };
+    this.scorePulseTransform = { scale: 1 };
 
     this.init();
   }
@@ -45,7 +52,46 @@ export default class SketchUI extends Sketch {
 
   //#region Custom methods
   init() {
+    this.setupTweens();
     this.bindEvents();
+  }
+
+  setupTweens() {
+    // clock timeline ----------------------------
+    const clockStep1 = new Tween(this.clockTransform)
+      .to({ scale: 0.9 }, 80)
+      .easing(Easing.Quadratic.Out);
+
+    const clockStep2 = new Tween(this.clockTransform)
+      .to({ scale: 0.95 }, 80)
+      .easing(Easing.Quadratic.Out);
+    
+    const clockStep3 = new Tween(this.clockTransform)
+      .to({ scale: 0.9 }, 80)
+      .easing(Easing.Quadratic.Out);
+
+    const clockStep4 = new Tween(this.clockTransform)
+      .to({ scale: 1 }, 80)
+      .easing(Easing.Quadratic.In);
+
+    clockStep1.chain(clockStep2);
+    clockStep2.chain(clockStep3);
+    clockStep3.chain(clockStep4);
+
+    this.clockPulseTween = clockStep1;
+
+    // score pulse timeline ------------------------
+    const scorePulseSetep1 = new Tween(this.scorePulseTransform)
+      .to({ scale: 1.2 }, 100)
+      .easing(Easing.Quadratic.In);
+    
+    const scorePulseSetep2 = new Tween(this.scorePulseTransform)
+      .to({ scale: 1 }, 100)
+      .easing(Easing.Quadratic.Out);
+
+    scorePulseSetep1.chain(scorePulseSetep2);
+
+    this.scorePulseTween = scorePulseSetep1;
   }
 
   bindEvents() {
@@ -59,6 +105,7 @@ export default class SketchUI extends Sketch {
 
   onCompleteDraw() {
     store.dispatch({type: 'UP_SCORE'});
+    this.scorePulseTween.start();
   }
 
   publishResources() {
@@ -80,8 +127,8 @@ export default class SketchUI extends Sketch {
     // cheese icon points ---------------------
     const cheesePointsIcon = this.tilesetData.frames['cheese-points.png'];
     this.cheesePointsIcon = {
-      xDraw: this.GAME_WIDTH/2 - 5,
-      yDraw: 47*this.GAME_SCALE,
+      xDraw: this.GAME_WIDTH/2 + 9,
+      yDraw: 60*this.GAME_SCALE,
       wDraw: cheesePointsIcon.frame.w*this.GAME_SCALE,
       hDraw: cheesePointsIcon.frame.h*this.GAME_SCALE,
       ...cheesePointsIcon.frame
@@ -111,7 +158,7 @@ export default class SketchUI extends Sketch {
     const timerClock = this.tilesetData.frames['clock.png'];
     this.timerClock = {
       xDraw: this.timeBarFull.xDraw,
-      yDraw: this.timeBarFull.yDraw + this.timeBarFull.hDraw/2,
+      yDraw: this.timeBarFull.yDraw + this.timeBarFull.hDraw/2 - 2,
       wDraw: timerClock.frame.w*this.GAME_SCALE,
       hDraw: timerClock.frame.h*this.GAME_SCALE,
       ...timerClock.frame
@@ -126,13 +173,21 @@ export default class SketchUI extends Sketch {
     }
   }
 
-  getTimeFactor() {
-    return ((Date.now() - this.startTime) / 1000) / this.timer;
+  getTimeEllapsed() {
+    return (Date.now() - this.startTime) / 1000;
   }
 
   validateTimer() {
-    this.timeFactor = this.getTimeFactor();
+    const ellapsed = (Date.now() - this.startTime) / 1000;
+    const intEllapsed = Math.ceil(ellapsed);
+
+    this.timeFactor = ellapsed / this.timer;
     if (this.timeFactor > 1) this.triggerFinishGame();
+
+    if (intEllapsed !== this.currentSecond) {
+      this.clockPulseTween.start();
+      this.currentSecond = intEllapsed;
+    }
   }
 
   triggerFinishGame() {
@@ -189,13 +244,13 @@ export default class SketchUI extends Sketch {
       this.barPoints.h
     );
 
-    p5.imageMode(p5.CORNER);
+    p5.imageMode(p5.CENTER);
     p5.image(
       this.spriteMedia,
       this.cheesePointsIcon.xDraw,
       this.cheesePointsIcon.yDraw,
-      this.cheesePointsIcon.wDraw,
-      this.cheesePointsIcon.hDraw,
+      this.cheesePointsIcon.wDraw * this.scorePulseTransform.scale,
+      this.cheesePointsIcon.hDraw * this.scorePulseTransform.scale,
       this.cheesePointsIcon.x,
       this.cheesePointsIcon.y,
       this.cheesePointsIcon.w,
@@ -243,8 +298,8 @@ export default class SketchUI extends Sketch {
       this.spriteMedia,
       this.timerClock.xDraw + this.timeFactor*this.timeBarEmpty.wDraw,
       this.timerClock.yDraw,
-      this.timerClock.wDraw,
-      this.timerClock.hDraw,
+      this.timerClock.wDraw * this.clockTransform.scale,
+      this.timerClock.hDraw * this.clockTransform.scale,
       this.timerClock.x,
       this.timerClock.y,
       this.timerClock.w,
@@ -254,22 +309,39 @@ export default class SketchUI extends Sketch {
 
   renderPointsInfo() {
     const { p5 } = this;
-    const state = store.getState();
 
     // format
     p5.fill(255);
     p5.strokeWeight(2*this.GAME_SCALE);
     p5.stroke(255, 100, 0);
-    p5.textSize(20*this.GAME_SCALE);
     p5.textStyle(p5.BOLD);
 
+    this.renderPoints();
+    this.renderMultiplier();
+  }
+
+  renderPoints() {
+    const { p5 } = this;
+    const state = store.getState();
+
+    // format
+    p5.textSize(20*this.GAME_SCALE*this.scorePulseTransform.scale);
+
     // points
-    p5.textAlign(p5.LEFT, p5.CENTER);
-    p5.text(pad(state.score, 4), this.GAME_WIDTH/2 - this.barPoints.wDraw/2 + this.barPoints.wDraw*0.15, 61*this.GAME_SCALE);
-    
+    p5.textAlign(p5.CENTER);
+    p5.text(pad(state.score, 4), this.GAME_WIDTH/2 - this.barPoints.wDraw/4 + 5, 63*this.GAME_SCALE);
+  }
+
+  renderMultiplier() {
+    const { p5 } = this;
+    const state = store.getState();
+
+    // format
+    p5.textSize(20*this.GAME_SCALE);
+
     // multiplier
     p5.textAlign(p5.RIGHT, p5.CENTER);
-    p5.text(`x${state.level}`, this.GAME_WIDTH/2 + this.barPoints.wDraw/2 - this.barPoints.wDraw*0.15, 61*this.GAME_SCALE);
+    p5.text(`x${state.level}`, this.GAME_WIDTH/2 + this.barPoints.wDraw/2 - this.barPoints.wDraw*0.15, 62*this.GAME_SCALE);
   }
   //#endregion Custom methods
 };

@@ -1,3 +1,4 @@
+import { Tween, Easing } from '@tweenjs/tween.js';
 import Sketch from './sketch';
 import store from './store';
 import { 
@@ -19,15 +20,15 @@ export default class SketchPlayer extends Sketch {
     
     this.brushPos = null;
     this.lastPoint = null;
+
+    this.shapeTransform = { scale: 0 };
     
     // flags
     this.gameOver = false;
     this.isDrawing = false;
-    this.isTheFirstPhase = true;
-    this.isRenderingShape = true;
-    this.isRedrawingBuffer = false;
+    this.isTweeningShape = true;
 
-    this.bindEvents();
+    this.init();
   }
 
   //#region p5.js main methods
@@ -40,7 +41,7 @@ export default class SketchPlayer extends Sketch {
 
     switch(state.gameState) {
       case 'PLAY':
-        this.renderScene();
+        if (this.isTweeningShape) this.renderScene(); // update draw on tweening transition
         this.renderUserPlay();
         return;
       case 'GAME_OVER':
@@ -74,8 +75,35 @@ export default class SketchPlayer extends Sketch {
   //#endregion p5.js event handlers
 
   //#region Custom methods
+  init() {
+    this.setupTweens();
+    this.bindEvents();
+  }
+
   bindEvents() {
-    this.pubsub.suscribe('uiSpriteReady', this.setupAssets.bind(this));
+    this.pubsub.suscribe('uiSpriteReady', this.setupAssets, this);
+    this.pubsub.suscribe('startGame', this.onStartGame, this);
+  }
+
+  onStartGame() {
+    this.scaleInShapeTween.start();
+  }
+
+  setupTweens() {
+    this.scaleInShapeTween = new Tween(this.shapeTransform)
+      .to({ scale: 1 }, 300)
+      .easing(Easing.Elastic.Out)
+      .onComplete(() => {
+        this.isTweeningShape = false;
+        this.setupPixels();
+      });
+    
+    this.updateShapeTween = new Tween(this.shapeTransform)
+      .to({ scale: 0 }, 200)
+      .easing(Easing.Quadratic.In)
+      .onStart(() => this.isTweeningShape = true)
+      .onComplete(this.updateShape.bind(this))
+      .chain(this.scaleInShapeTween);
   }
 
   setupAssets({ spriteMedia, tilesetData }) {
@@ -132,17 +160,12 @@ export default class SketchPlayer extends Sketch {
 
   renderUserPlay() {
     if (this.isDrawing) this.drawBrush();
-    // if (this.isTheFirstPhase) this.setupPixels();
   }
 
   renderScene() {
-    if (this.isRenderingShape) { 
-      this.renderBackground();
-      this.renderShape();
-      this.setupPixels()
-    }
-    
-    if (this.isRedrawingBuffer) this.redrawBuffer();
+    this.renderBackground();
+    this.renderShape();
+    this.redrawBuffer();
   }
 
   renderBuffer() {
@@ -160,7 +183,7 @@ export default class SketchPlayer extends Sketch {
 
   renderShape() {
     const { p5, buffer } = this;
-    const size = Math.min(this.BASE_WIDTH, this.BASE_HEIGHT) * 0.9;
+    const size = Math.min(this.BASE_WIDTH, this.BASE_HEIGHT) * 0.9 * this.shapeTransform.scale;
 
     buffer.imageMode(p5.CENTER);
     buffer.image(
@@ -191,15 +214,11 @@ export default class SketchPlayer extends Sketch {
   }
 
   updateShape() {
-    this.buffer.clear();
-    this.p5.clear();
-    this.isRenderingShape = true;
-    this.isRedrawingBuffer = true;
+    console.log('update shape!');
   }
 
   setupPixels() {
     this.completeShapePixels = this.getBlackPixels();
-    this.isTheFirstPhase = false;
     console.log('totalBlackPixels:', this.completeShapePixels);
   }
 
@@ -209,7 +228,7 @@ export default class SketchPlayer extends Sketch {
     console.log({progress});
 
     if (progress >= this.minProgress) {
-      this.updateShape();
+      this.updateShapeTween.start();
       this.pubsub.publish('completedDraw');
     }
   }

@@ -2,6 +2,7 @@ import SketchPlayer from './sketch.player';
 import SketchUI from './sketch.ui';
 import PubSub from './pubsub';
 import store from './store';
+import TWEEN from '@tweenjs/tween.js';
 
 export default class GameApp {
   constructor(config = {}) {
@@ -84,6 +85,8 @@ export default class GameApp {
   
   draw() {
     this.requestId = window.requestAnimationFrame(this.draw.bind(this));
+
+    TWEEN.update();
     
     const state = store.getState();
     if (state.playerSketchReady && state.uiSketchReady) {
