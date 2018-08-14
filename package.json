@@ -5,8 +5,8 @@
   "author": "TheFrost <frost084@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "rm -rf .cache/ && parcel src/index.html --out-dir public/",
-    "build": "rm -rf build/ && parcel build src/index.html --out-dir build/ && cp -R public/resources build/resources"
+    "start": "rm -rf .cache/ && parcel src/index.html --no-source-maps --out-dir public/",
+    "build": "rm -rf build/ && parcel build src/index.html --no-source-maps --out-dir build/ && cp -R public/resources build/resources"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
