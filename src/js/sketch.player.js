@@ -214,18 +214,18 @@ export default class SketchPlayer extends Sketch {
   }
 
   updateShape() {
-    console.log('update shape!');
+    // console.log('update shape!');
   }
 
   setupPixels() {
     this.completeShapePixels = this.getBlackPixels();
-    console.log('totalBlackPixels:', this.completeShapePixels);
+    // console.log('totalBlackPixels:', this.completeShapePixels);
   }
 
   validatePixels() {
     const blackPixels = this.getBlackPixels();
     const progress = 100 - Math.ceil(blackPixels/this.completeShapePixels*100);
-    console.log({progress});
+    // console.log({progress});
 
     if (progress >= this.minProgress) {
       this.updateShapeTween.start();

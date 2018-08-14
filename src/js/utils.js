@@ -31,10 +31,10 @@ export const createStore = (reducer) => {
   const dispatch = (action) => {
     state = reducer(state, action);
 
-    console.log('--------------------');
-    console.log('action:', action)
-    console.log('current state:', state);
-    console.log('--------------------');
+    // console.log('--------------------');
+    // console.log('action:', action)
+    // console.log('current state:', state);
+    // console.log('--------------------');
     
     listeners.forEach(listener => listener());
   };
