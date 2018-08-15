@@ -85,8 +85,8 @@ export default class Sketch {
 
   windowResize() {
     this.resizeCalc();
-    this.resize();
     this.p5.resizeCanvas(this.GAME_WIDTH, this.GAME_HEIGHT);
+    this.resize();
   }
 
   setup() {}

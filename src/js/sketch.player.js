@@ -78,7 +78,7 @@ export default class SketchPlayer extends Sketch {
     this.validatePixels();
   }
 
-  resize() { this.isRedrawingBuffer = true; }
+  resize() { this.renderBuffer(); }
   //#endregion p5.js event handlers
 
   //#region Custom methods
@@ -184,7 +184,7 @@ export default class SketchPlayer extends Sketch {
   renderScene() {
     this.renderBackground();
     this.renderShape();
-    this.redrawBuffer();
+    this.renderBuffer();
   }
 
   renderBuffer() {
@@ -193,11 +193,6 @@ export default class SketchPlayer extends Sketch {
     p5.clear();
     p5.imageMode(p5.CORNER);
     p5.image(buffer, 0, 0, this.GAME_WIDTH, this.GAME_HEIGHT);
-  }
-
-  redrawBuffer() {
-    this.renderBuffer();
-    this.isRedrawingBuffer = false;
   }
 
   renderShape() {
