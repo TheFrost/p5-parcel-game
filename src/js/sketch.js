@@ -1,6 +1,6 @@
 import p5 from 'p5/lib/p5.min.js';
 import PubSub from './pubsub';
-import { debounce } from 'underscore';
+import { debounce } from './utils';
 
 export default class Sketch {
   constructor(config) {
