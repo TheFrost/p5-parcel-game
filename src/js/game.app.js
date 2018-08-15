@@ -78,6 +78,7 @@ export default class GameApp {
     });
     
     this.sketchUi = new SketchUI({
+      setupBuffer: true,
       parent: 'sketch-ui',
       ...this.config
     });

@@ -1,5 +1,5 @@
 import Sketch from './sketch';
-import { pad } from './utils';
+import { pad, isMobile } from './utils';
 import store from './store';
 import { Tween, Easing } from '@tweenjs/tween.js';
 
@@ -10,18 +10,13 @@ export default class SketchUI extends Sketch {
     // defaults
     this.config = {
       timeLimit: 60,
-      movilePointer: true,
+      mobilePointer: true,
       resourcesPath: 'resources',
       ...config
     };
 
     this.timeFactor = 0;
     this.currentSecond = 0;
-
-    // transform facors for tweening
-    this.clockTransform = { scale: 1 };
-    this.cheeseTransform = { scale: 1 };
-    this.scorePulseTransform = { scale: 1 };
 
     this.init();
   }
@@ -42,19 +37,24 @@ export default class SketchUI extends Sketch {
   draw() {
     const state = store.getState();
 
+    this.p5.clear();
+    this.buffer.clear();
+
     switch(state.gameState) {
       case 'PLAY':
+        if(!isMobile() || this.config.mobilePointer) this.renderPointer();
         this.renderUI();
+        this.renderBuffer();
         this.validateTimer();
         return;
       case 'GAME_OVER':
+        this.p5.cursor(this.p5.ARROW);
         this.renderUI();
+        this.renderBuffer();
         return;
       default: return;
     }
   }
-
-  resize() { this.setupAssets(); }
   //#endregion p5.js main methods
 
   //#region Custom methods
@@ -65,29 +65,34 @@ export default class SketchUI extends Sketch {
 
   setupTweens() {
     // clock timeline ----------------------------
+    this.clockTransform = { scale: 1 };
+    
     const clockStep1 = new Tween(this.clockTransform)
-      .to({ scale: 0.9 }, 80)
-      .easing(Easing.Quadratic.Out);
-
+    .to({ scale: 0.9 }, 80)
+    .easing(Easing.Quadratic.Out);
+    
     const clockStep2 = new Tween(this.clockTransform)
-      .to({ scale: 0.95 }, 80)
-      .easing(Easing.Quadratic.Out);
+    .to({ scale: 0.95 }, 80)
+    .easing(Easing.Quadratic.Out);
     
     const clockStep3 = new Tween(this.clockTransform)
-      .to({ scale: 0.9 }, 80)
-      .easing(Easing.Quadratic.Out);
-
+    .to({ scale: 0.9 }, 80)
+    .easing(Easing.Quadratic.Out);
+    
     const clockStep4 = new Tween(this.clockTransform)
-      .to({ scale: 1 }, 80)
-      .easing(Easing.Quadratic.In);
-
+    .to({ scale: 1 }, 80)
+    .easing(Easing.Quadratic.In);
+    
     clockStep1.chain(clockStep2);
     clockStep2.chain(clockStep3);
     clockStep3.chain(clockStep4);
-
+    
     this.clockPulseTween = clockStep1;
-
+    
     // score pulse timeline ------------------------
+    this.cheeseTransform = { scale: 1 };
+    this.scorePulseTransform = { scale: 1 };
+    
     const scorePulseSetep1 = new Tween(this.scorePulseTransform)
       .to({ scale: 1.2 }, 100)
       .easing(Easing.Quadratic.In);
@@ -124,40 +129,40 @@ export default class SketchUI extends Sketch {
     // bar points -----------------------------
     const barPoints = this.tilesetData.frames['points-bar.png'];
     this.barPoints = {
-      xDraw: this.GAME_WIDTH/2,
-      yDraw: 63*this.GAME_SCALE,
-      wDraw: barPoints.frame.w*this.GAME_SCALE,
-      hDraw: barPoints.frame.h*this.GAME_SCALE,
+      xDraw: this.BASE_WIDTH/2,
+      yDraw: 63,
+      wDraw: barPoints.frame.w,
+      hDraw: barPoints.frame.h,
       ...barPoints.frame
     };
 
     // cheese icon points ---------------------
     const cheesePointsIcon = this.tilesetData.frames['cheese-points.png'];
     this.cheesePointsIcon = {
-      xDraw: this.GAME_WIDTH/2 + 9,
-      yDraw: 60*this.GAME_SCALE,
-      wDraw: cheesePointsIcon.frame.w*this.GAME_SCALE,
-      hDraw: cheesePointsIcon.frame.h*this.GAME_SCALE,
+      xDraw: this.BASE_WIDTH/2 + 9,
+      yDraw: 60,
+      wDraw: cheesePointsIcon.frame.w,
+      hDraw: cheesePointsIcon.frame.h,
       ...cheesePointsIcon.frame
     };
 
     // bar time empty -------------------------
     const barTimeEmpty = this.tilesetData.frames['time-bar.png'];
     this.timeBarEmpty = {
-      xDraw: this.GAME_WIDTH/2,
-      yDraw: this.GAME_HEIGHT - 63*this.GAME_SCALE,
-      wDraw: barTimeEmpty.frame.w*this.GAME_SCALE,
-      hDraw: barTimeEmpty.frame.h*this.GAME_SCALE,
+      xDraw: this.BASE_WIDTH/2,
+      yDraw: this.BASE_HEIGHT - 63,
+      wDraw: barTimeEmpty.frame.w,
+      hDraw: barTimeEmpty.frame.h,
       ...barTimeEmpty.frame
     };
 
     // bar time full --------------------------
     const barTimeFull = this.tilesetData.frames['time-bar-full.png'];
     this.timeBarFull = {
-      xDraw: this.GAME_WIDTH/2-barTimeFull.frame.w*this.GAME_SCALE/2,
-      yDraw: this.GAME_HEIGHT - 81*this.GAME_SCALE,
-      wDraw: barTimeFull.frame.w*this.GAME_SCALE,
-      hDraw: barTimeFull.frame.h*this.GAME_SCALE,
+      xDraw: this.BASE_WIDTH/2-barTimeFull.frame.w/2,
+      yDraw: this.BASE_HEIGHT - 81,
+      wDraw: barTimeFull.frame.w,
+      hDraw: barTimeFull.frame.h,
       ...barTimeFull.frame
     };
 
@@ -166,16 +171,16 @@ export default class SketchUI extends Sketch {
     this.timerClock = {
       xDraw: this.timeBarFull.xDraw,
       yDraw: this.timeBarFull.yDraw + this.timeBarFull.hDraw/2 - 2,
-      wDraw: timerClock.frame.w*this.GAME_SCALE,
-      hDraw: timerClock.frame.h*this.GAME_SCALE,
+      wDraw: timerClock.frame.w,
+      hDraw: timerClock.frame.h,
       ...timerClock.frame
     };
 
     // chester hand
     const pointer = this.tilesetData.frames['hand-pointer.png'];
     this.pointer = {
-      wDraw: pointer.frame.w*this.GAME_SCALE,
-      hDraw: pointer.frame.h*this.GAME_SCALE,
+      wDraw: pointer.frame.w,
+      hDraw: pointer.frame.h,
       ...pointer.frame
     }
   }
@@ -209,23 +214,23 @@ export default class SketchUI extends Sketch {
       log: 'log',
       score: state.finalScore
     });
+
+    this.windowResize();
   }
 
   renderUI() {
-    this.p5.clear();
-    if(this.config.movilePointer) this.renderPointer();
     this.renderBarPoints();
     this.renderTimeBar();
   }
 
   renderPointer() {
-    const { p5 } = this;
+    const { buffer, p5 } = this;
 
-    p5.imageMode(p5.CORNER);
-    p5.image(
+    buffer.imageMode(buffer.CORNER);
+    buffer.image(
       this.spriteMedia,
-      p5.mouseX-9*this.GAME_SCALE,
-      p5.mouseY-10*this.GAME_SCALE,
+      (p5.mouseX-9)/this.GAME_SCALE,
+      (p5.mouseY-10)/this.GAME_SCALE,
       this.pointer.wDraw,
       this.pointer.hDraw,
       this.pointer.x,
@@ -236,10 +241,10 @@ export default class SketchUI extends Sketch {
   }
 
   renderBarPoints() {
-    const { p5 } = this;
+    const { buffer } = this;
 
-    p5.imageMode(p5.CENTER);
-    p5.image(
+    buffer.imageMode(buffer.CENTER);
+    buffer.image(
       this.spriteMedia,
       this.barPoints.xDraw,
       this.barPoints.yDraw,
@@ -251,8 +256,8 @@ export default class SketchUI extends Sketch {
       this.barPoints.h
     );
 
-    p5.imageMode(p5.CENTER);
-    p5.image(
+    buffer.imageMode(buffer.CENTER);
+    buffer.image(
       this.spriteMedia,
       this.cheesePointsIcon.xDraw,
       this.cheesePointsIcon.yDraw,
@@ -268,12 +273,12 @@ export default class SketchUI extends Sketch {
   }
 
   renderTimeBar() {
-    const { p5 } = this;
+    const { buffer } = this;
 
-    p5.imageMode(p5.CENTER);
+    buffer.imageMode(buffer.CENTER);
 
     // time bar empty
-    p5.image(
+    buffer.image(
       this.spriteMedia,
       this.timeBarEmpty.xDraw,
       this.timeBarEmpty.yDraw,
@@ -286,8 +291,8 @@ export default class SketchUI extends Sketch {
     );
 
     // time bar full
-    p5.imageMode(p5.CORNER);
-    p5.image(
+    buffer.imageMode(buffer.CORNER);
+    buffer.image(
       this.spriteMedia,
       this.timeBarFull.xDraw,
       this.timeBarFull.yDraw,
@@ -300,8 +305,8 @@ export default class SketchUI extends Sketch {
     );
 
     // timer clock
-    p5.imageMode(p5.CENTER);
-    p5.image(
+    buffer.imageMode(buffer.CENTER);
+    buffer.image(
       this.spriteMedia,
       this.timerClock.xDraw + this.timeFactor*this.timeBarEmpty.wDraw,
       this.timerClock.yDraw,
@@ -315,40 +320,48 @@ export default class SketchUI extends Sketch {
   }
 
   renderPointsInfo() {
-    const { p5 } = this;
+    const { buffer } = this;
 
     // format
-    p5.fill(255);
-    p5.strokeWeight(2*this.GAME_SCALE);
-    p5.stroke(255, 100, 0);
-    p5.textStyle(p5.BOLD);
+    buffer.fill(255);
+    buffer.strokeWeight(2);
+    buffer.stroke(255, 100, 0);
+    buffer.textStyle(buffer.BOLD);
 
     this.renderPoints();
     this.renderMultiplier();
   }
 
   renderPoints() {
-    const { p5 } = this;
+    const { buffer } = this;
     const state = store.getState();
 
     // format
-    p5.textSize(20*this.GAME_SCALE*this.scorePulseTransform.scale);
+    buffer.textSize(20*this.scorePulseTransform.scale);
 
     // points
-    p5.textAlign(p5.CENTER);
-    p5.text(pad(state.score, 4), this.GAME_WIDTH/2 - this.barPoints.wDraw/4 + 5, 63*this.GAME_SCALE);
+    buffer.textAlign(buffer.CENTER);
+    buffer.text(pad(state.score, 4), this.BASE_WIDTH/2 - this.barPoints.wDraw/4 + 5, 63);
   }
 
   renderMultiplier() {
-    const { p5 } = this;
+    const { buffer } = this;
     const state = store.getState();
 
     // format
-    p5.textSize(20*this.GAME_SCALE);
+    buffer.textSize(20);
 
     // multiplier
-    p5.textAlign(p5.RIGHT, p5.CENTER);
-    p5.text(`x${state.level}`, this.GAME_WIDTH/2 + this.barPoints.wDraw/2 - this.barPoints.wDraw*0.15, 62*this.GAME_SCALE);
+    buffer.textAlign(buffer.RIGHT, buffer.CENTER);
+    buffer.text(`x${state.level}`, this.BASE_WIDTH/2 + this.barPoints.wDraw/2 - this.barPoints.wDraw*0.15, 62);
+  }
+
+  renderBuffer() {
+    const { p5, buffer } = this;
+
+    p5.clear();
+    p5.imageMode(p5.CORNER);
+    p5.image(buffer, 0, 0, this.GAME_WIDTH, this.GAME_HEIGHT);
   }
   //#endregion Custom methods
 };
