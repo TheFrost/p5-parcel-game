@@ -42,7 +42,15 @@
     var app = new GameApp({ 
       w: 360, 
       h: 640,
-      containerId: 'sketch-wrapper'
+      containerId: 'sketch-wrapper',
+      movilePointer: true,
+      resourcesPath: 'resources/',
+      timeLimit: 60,
+      minLimitDrawDesk: 80,
+      minLimitDrawMob: 90,
+      brushSizeDesk: 13,
+      brushSizeMob: 20,
+      scaleCanvasFactor: 0.9
     });
 
     // example of game loaded handler state and wait for start

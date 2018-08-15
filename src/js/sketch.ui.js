@@ -7,7 +7,14 @@ export default class SketchUI extends Sketch {
   constructor(config) {
     super(config);
 
-    this.timer = config.timeLimit || 60; // in seconds
+    // defaults
+    this.config = {
+      timeLimit: 60,
+      movilePointer: true,
+      resourcesPath: 'resources',
+      ...config
+    };
+
     this.timeFactor = 0;
     this.currentSecond = 0;
 
@@ -21,8 +28,8 @@ export default class SketchUI extends Sketch {
 
   //#region p5.js main methods
   preload() {
-    this.spriteMedia = this.p5.loadImage('resources/cheetos-ui.png');
-    this.tilesetData = this.p5.loadJSON('resources/cheetos-ui.json');
+    this.spriteMedia = this.p5.loadImage(`${this.config.resourcesPath}/cheetos-ui.png`);
+    this.tilesetData = this.p5.loadJSON(`${this.config.resourcesPath}/cheetos-ui.json`);
   }
   
   setup() { 
@@ -181,7 +188,7 @@ export default class SketchUI extends Sketch {
     const ellapsed = (Date.now() - this.startTime) / 1000;
     const intEllapsed = Math.ceil(ellapsed);
 
-    this.timeFactor = ellapsed / this.timer;
+    this.timeFactor = ellapsed / this.config.timeLimit;
     if (this.timeFactor > 1) this.triggerFinishGame();
 
     if (intEllapsed !== this.currentSecond) {
@@ -206,7 +213,7 @@ export default class SketchUI extends Sketch {
 
   renderUI() {
     this.p5.clear();
-    this.renderPointer();
+    if(this.config.movilePointer) this.renderPointer();
     this.renderBarPoints();
     this.renderTimeBar();
   }

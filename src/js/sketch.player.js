@@ -12,10 +12,26 @@ export default class SketchPlayer extends Sketch {
   constructor(config) {
     super(config);
 
+    // defaults
+    this.config = {
+      minLimitDrawDesk: 80,
+      minLimitDrawMob: 90,
+      brushSizeDesk: 13,
+      brushSizeMob: 20,
+      ...config
+    };
+
     const isSmarthphoneFlag = isSmarthphone();
 
-    this.brushSize = isSmarthphoneFlag ? 20 : 13;
-    this.minProgress = isSmarthphoneFlag ? 90 : 80;
+    const { 
+      minLimitDrawDesk, 
+      minLimitDrawMob,
+      brushSizeDesk,
+      brushSizeMob
+    } = this.config;
+
+    this.brushSize = isSmarthphoneFlag ? brushSizeMob : brushSizeDesk;
+    this.minProgress = isSmarthphoneFlag ? minLimitDrawMob : minLimitDrawDesk;
     this.completeShapePixels = 0;
     
     this.brushPos = null;

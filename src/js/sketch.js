@@ -9,8 +9,7 @@ export default class Sketch {
 
     this.sketch = {
       w: 360, 
-      h: 640, 
-      timeLimit: 60,
+      h: 640,
       setupBuffer: false,
       parent: null,
       ...config 
@@ -20,7 +19,7 @@ export default class Sketch {
 
     this.BASE_WIDTH = this.sketch.w;
     this.BASE_HEIGHT = this.sketch.h;
-    this.BASE_FACTOR = 0.9;
+    this.BASE_FACTOR = config.scaleCanvasFactor;
 
     this.p5Instance();
   }
