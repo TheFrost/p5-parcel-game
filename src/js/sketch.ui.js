@@ -27,7 +27,6 @@ export default class SketchUI extends Sketch {
   preload() {
     const { p5 } = this;
 
-    this.cheeseBoom = p5.loadImage(`${this.config.resourcesPath}/cheese-boom.png`);
     this.spriteMedia = p5.loadImage(`${this.config.resourcesPath}/cheetos-ui.png`);
     this.tilesetData = p5.loadJSON(`${this.config.resourcesPath}/cheetos-ui.json`);
 
