@@ -1,0 +1,207 @@
+{
+  "frames": {
+    "cheetos_logo.png": {
+      "frame": {
+        "x": 1,
+        "y": 1,
+        "w": 249,
+        "h": 149
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 249,
+        "h": 149
+      },
+      "sourceSize": {
+        "w": 249,
+        "h": 149
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "control.png": {
+      "frame": {
+        "x": 252,
+        "y": 1,
+        "w": 249,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 249,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 249,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bicicleta.png": {
+      "frame": {
+        "x": 503,
+        "y": 1,
+        "w": 249,
+        "h": 201
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 249,
+        "h": 201
+      },
+      "sourceSize": {
+        "w": 249,
+        "h": 201
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "garra.png": {
+      "frame": {
+        "x": 754,
+        "y": 1,
+        "w": 249,
+        "h": 238
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 249,
+        "h": 238
+      },
+      "sourceSize": {
+        "w": 249,
+        "h": 238
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "logo_sabritas.png": {
+      "frame": {
+        "x": 1,
+        "y": 152,
+        "w": 249,
+        "h": 247
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 249,
+        "h": 247
+      },
+      "sourceSize": {
+        "w": 249,
+        "h": 247
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "balon_futbol.png": {
+      "frame": {
+        "x": 252,
+        "y": 203,
+        "w": 249,
+        "h": 248
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 249,
+        "h": 248
+      },
+      "sourceSize": {
+        "w": 249,
+        "h": 248
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "helado.png": {
+      "frame": {
+        "x": 503,
+        "y": 204,
+        "w": 133,
+        "h": 249
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 133,
+        "h": 249
+      },
+      "sourceSize": {
+        "w": 133,
+        "h": 249
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "tabla.png": {
+      "frame": {
+        "x": 638,
+        "y": 241,
+        "w": 230,
+        "h": 249
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 230,
+        "h": 249
+      },
+      "sourceSize": {
+        "w": 230,
+        "h": 249
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com/",
+    "version": "0.3.3",
+    "image": "shapes3.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 1024,
+      "h": 512
+    },
+    "scale": 1
+  }
+}
