@@ -40,7 +40,6 @@ export default class SketchPlayer extends Sketch {
     this.shapeTransform = { scale: 0 };
     
     // flags
-    this.gameOver = false;
     this.isDrawing = false;
     this.isTweeningShape = true;
 
@@ -68,7 +67,7 @@ export default class SketchPlayer extends Sketch {
         this.renderUserPlay();
         return;
       case 'GAME_OVER':
-        this.renderScene();
+        this.renderBuffer();
         return;
       default: return;
     }
