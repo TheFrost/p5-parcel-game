@@ -125,3 +125,7 @@ export default class GameApp {
   // global event handler method of game
   on(event, callback) { this.pubsub.suscribe(event, callback); }
 }
+
+if (typeof module !== 'undefined') {
+  module.exports = GameApp
+}
