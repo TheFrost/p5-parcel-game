@@ -45,18 +45,6 @@ export default class SketchPlayer extends Sketch {
 
     this.init();
   }
-
-  //#region p5.js main methods
-  preload() {
-    const { p5 } = this;
-
-    for (let i = 1; i < 4; i++) {
-      this[`spriteLevel${i}`] = {
-        sprite: p5.loadImage(`resources/shapes${i}.png`),
-        data: p5.loadJSON(`resources/shapes${i}.json`)
-      };
-    }
-  }
   
   draw() {
     const state = store.getState();
@@ -103,17 +91,26 @@ export default class SketchPlayer extends Sketch {
   }
 
   bindEvents() {
-    this.pubsub.suscribe('uiSpriteReady', this.setupAssets, this);
+    this.pubsub.suscribe('resourcesReady', this.setupAssets, this);
     this.pubsub.suscribe('startGame', this.onStartGame, this);
   }
 
   onStartGame() {
-    this.setupShapesResources();
+    this.setupSpriteLevelState();
     this.updateShape();
     this.scaleInShapeTween.start();
   }
 
-  setupShapesResources() {
+  setupShapesResources(spriteLevels) {
+    for (let i = 0; i < spriteLevels.length; i++) {
+      this[`spriteLevel${i + 1}`] = {
+        sprite: spriteLevels[i].sprite,
+        data: spriteLevels[i].data
+      };
+    }
+  }
+
+  setupSpriteLevelState() {
     const state = store.getState();
 
     this.currentLevelKeys = Object.keys(this[`spriteLevel${state.level}`].data.frames);
@@ -140,7 +137,14 @@ export default class SketchPlayer extends Sketch {
       .chain(this.scaleInShapeTween);
   }
 
-  setupAssets({ spriteMedia, tilesetData }) {
+  setupAssets({spriteMedia, tilesetData, spriteLevels}) {
+    this.setupUIAssets(spriteMedia, tilesetData);
+    this.setupShapesResources(spriteLevels);
+
+    store.dispatch({type: 'SET_PLAYER_SKETCH_READY'});
+  }
+
+  setupUIAssets(spriteMedia, tilesetData) {
     this.spriteMedia = spriteMedia;
 
     // brush
@@ -158,8 +162,6 @@ export default class SketchPlayer extends Sketch {
       yDraw: 0,
       ...bgGame.frame
     };
-
-    store.dispatch({type: 'SET_PLAYER_SKETCH_READY'});
   }
 
   drawBrush() {

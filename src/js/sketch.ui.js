@@ -18,13 +18,25 @@ export default class SketchUI extends Sketch {
     this.timeFactor = 0;
     this.currentSecond = 0;
 
+    this.spriteLevels = [];
+
     this.init();
   }
 
   //#region p5.js main methods
   preload() {
-    this.spriteMedia = this.p5.loadImage(`${this.config.resourcesPath}/cheetos-ui.png`);
-    this.tilesetData = this.p5.loadJSON(`${this.config.resourcesPath}/cheetos-ui.json`);
+    const { p5 } = this;
+
+    this.spriteMedia = p5.loadImage(`${this.config.resourcesPath}/cheetos-ui.png`);
+    this.tilesetData = p5.loadJSON(`${this.config.resourcesPath}/cheetos-ui.json`);
+
+    // load sprite levels
+    for (let i = 1; i < 4; i++) {
+      this.spriteLevels.push({
+        sprite: p5.loadImage(`resources/shapes${i}.png`),
+        data: p5.loadJSON(`resources/shapes${i}.json`)
+      });
+    }
   }
   
   setup() { 
@@ -121,8 +133,8 @@ export default class SketchUI extends Sketch {
   }
 
   publishResources() {
-    const { spriteMedia, tilesetData } = this;
-    this.pubsub.publish('uiSpriteReady', { spriteMedia, tilesetData });
+    const { spriteMedia, tilesetData, spriteLevels } = this;
+    this.pubsub.publish('resourcesReady', { spriteMedia, tilesetData, spriteLevels });
   }
 
   setupAssets() {
