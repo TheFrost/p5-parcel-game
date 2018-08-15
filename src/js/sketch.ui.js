@@ -27,6 +27,7 @@ export default class SketchUI extends Sketch {
   preload() {
     const { p5 } = this;
 
+    this.cheeseBoom = p5.loadImage(`${this.config.resourcesPath}/cheese-boom.png`);
     this.spriteMedia = p5.loadImage(`${this.config.resourcesPath}/cheetos-ui.png`);
     this.tilesetData = p5.loadJSON(`${this.config.resourcesPath}/cheetos-ui.json`);
 
@@ -76,6 +77,14 @@ export default class SketchUI extends Sketch {
   }
 
   setupTweens() {
+    // cheese boom
+    this.cheeseBoomTransform = { scale: 0.01 };
+
+    this.cheeseBoomTween = new Tween(this.cheeseBoomTransform)
+      .to({ scale: 3 }, 500)
+      .easing(Easing.Quadratic.Out)
+      .onComplete(() => this.cheeseBoomTransform.scale = 0.01);
+
     // clock timeline ----------------------------
     this.clockTransform = { scale: 1 };
     
@@ -121,6 +130,11 @@ export default class SketchUI extends Sketch {
   bindEvents() {
     this.pubsub.suscribe('completedDraw', this.onCompleteDraw, this);
     this.pubsub.suscribe('startGame', this.onStartGame, this);
+    this.pubsub.suscribe('cheeseBoom', this.triggerCheeseBoom, this);
+  }
+
+  triggerCheeseBoom() {
+    this.cheeseBoomTween.start();
   }
 
   onStartGame() {
@@ -138,6 +152,16 @@ export default class SketchUI extends Sketch {
   }
 
   setupAssets() {
+    // cheese boom -----------------------------
+    const cheeseBoom = this.tilesetData.frames['cheese-boom.png'];
+    this.cheeseBoom = {
+      xDraw: this.BASE_WIDTH/2,
+      yDraw: this.BASE_HEIGHT/2,
+      wDraw: cheeseBoom.frame.w,
+      hDraw: cheeseBoom.frame.h,
+      ...cheeseBoom.frame
+    };
+
     // bar points -----------------------------
     const barPoints = this.tilesetData.frames['points-bar.png'];
     this.barPoints = {
@@ -231,8 +255,26 @@ export default class SketchUI extends Sketch {
   }
 
   renderUI() {
+    this.renderCheeseBoom();
     this.renderBarPoints();
     this.renderTimeBar();
+  }
+
+  renderCheeseBoom() {
+    const { buffer, p5 } = this;
+
+    buffer.imageMode(buffer.CENTER);
+    buffer.image(
+      this.spriteMedia,
+      this.cheeseBoom.xDraw,
+      this.cheeseBoom.yDraw,
+      this.cheeseBoom.wDraw * this.cheeseBoomTransform.scale,
+      this.cheeseBoom.hDraw * this.cheeseBoomTransform.scale,
+      this.cheeseBoom.x,
+      this.cheeseBoom.y,
+      this.cheeseBoom.w,
+      this.cheeseBoom.h
+    );
   }
 
   renderPointer() {

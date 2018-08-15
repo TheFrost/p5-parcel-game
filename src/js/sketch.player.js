@@ -124,6 +124,7 @@ export default class SketchPlayer extends Sketch {
     this.scaleInShapeTween = new Tween(this.shapeTransform)
       .to({ scale: 1 }, 300)
       .easing(Easing.Elastic.Out)
+      .onStart(() => this.pubsub.publish('cheeseBoom'))
       .onComplete(() => {
         this.isTweeningShape = false;
         this.setupPixels();
