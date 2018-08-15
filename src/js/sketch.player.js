@@ -33,7 +33,14 @@ export default class SketchPlayer extends Sketch {
 
   //#region p5.js main methods
   preload() {
-    this.shape = this.p5.loadImage('resources/shape.png');
+    const { p5 } = this;
+
+    for (let i = 1; i < 4; i++) {
+      this[`spriteLevel${i}`] = {
+        sprite: p5.loadImage(`resources/shapes${i}.png`),
+        data: p5.loadJSON(`resources/shapes${i}.json`)
+      };
+    }
   }
   
   draw() {
@@ -86,7 +93,19 @@ export default class SketchPlayer extends Sketch {
   }
 
   onStartGame() {
+    this.setupShapesResources();
+    this.updateShape();
     this.scaleInShapeTween.start();
+  }
+
+  setupShapesResources() {
+    const state = store.getState();
+
+    this.currentLevelKeys = Object.keys(this[`spriteLevel${state.level}`].data.frames);
+
+    if (state.level === 1 || state.level === 2) {
+      this.nextLevelKeys = Object.keys(this[`spriteLevel${state.level + 1}`].data.frames);
+    }
   }
 
   setupTweens() {
@@ -183,14 +202,18 @@ export default class SketchPlayer extends Sketch {
 
   renderShape() {
     const { p5, buffer } = this;
-    const size = Math.min(this.BASE_WIDTH, this.BASE_HEIGHT) * 0.9 * this.shapeTransform.scale;
 
     buffer.imageMode(p5.CENTER);
     buffer.image(
-      this.shape, 
+      this.shapeSprite, 
       this.BASE_WIDTH/2,
       this.BASE_HEIGHT/2,
-      size, size
+      this.shapeData.w * 1.2 * this.shapeTransform.scale,
+      this.shapeData.h * 1.2 * this.shapeTransform.scale,
+      this.shapeData.x,
+      this.shapeData.y,
+      this.shapeData.w,
+      this.shapeData.h
     );
 
     this.isRenderingShape = false;
@@ -214,22 +237,50 @@ export default class SketchPlayer extends Sketch {
   }
 
   updateShape() {
-    // console.log('update shape!');
+    if (this.currentLevelKeys.length === 0) {
+      this.triggerFinishGame();
+      return;
+    }
+
+    const { p5 } = this;
+    const state = store.getState();
+    let index, level;
+
+    // if level 1 or 2 and combo 5 override index and shape query to next level
+    if (
+      (state.level === 1 || state.level === 2) 
+      && state.comboCounter > 0 
+      && state.comboCounter % 5 === 0
+    ) {
+      level = state.level + 1;
+      index = Math.ceil(p5.random(this.nextLevelKeys.length - 1));
+      this.shapeSprite = this[`spriteLevel${level}`].sprite;
+      this.shapeData = this[`spriteLevel${level}`].data.frames[this.nextLevelKeys.pop(index)].frame;
+    } else {
+      level = state.level;
+      index = Math.ceil(p5.random(this.currentLevelKeys.length - 1));
+      this.shapeSprite = this[`spriteLevel${level}`].sprite;
+      this.shapeData = this[`spriteLevel${level}`].data.frames[this.currentLevelKeys.splice(index, 1)].frame;
+    }
   }
 
   setupPixels() {
     this.completeShapePixels = this.getBlackPixels();
-    // console.log('totalBlackPixels:', this.completeShapePixels);
   }
 
   validatePixels() {
     const blackPixels = this.getBlackPixels();
     const progress = 100 - Math.ceil(blackPixels/this.completeShapePixels*100);
-    // console.log({progress});
 
     if (progress >= this.minProgress) {
-      this.updateShapeTween.start();
       this.pubsub.publish('completedDraw');
+
+      this.updateShapeTween.start();
+      
+      const state = store.getState();
+      if (state.level === 1 || state.level === 2) {
+        store.dispatch({type: 'UP_COMBO_COUNTER'});
+      }
     }
   }
 
@@ -237,7 +288,21 @@ export default class SketchPlayer extends Sketch {
     const { buffer } = this;
 
     buffer.loadPixels();
-    return getPixelCounter(buffer.pixels, ({r, g, b, a}) => r+g+b === 0 && a === 255);
+    return getPixelCounter(buffer.pixels, ({r, g, b, a}) => r+g+b < 30 && a > 0);
+  }
+
+  triggerFinishGame() {
+    store.dispatch({type: 'CALC_FINAL_SCORE'});
+    store.dispatch({
+      type: 'SET_GAME_STATE',
+      gameState: 'GAME_OVER'
+    });
+
+    const state = store.getState();
+    this.pubsub.publish('gameOver', {
+      log: 'log',
+      score: state.finalScore
+    });
   }
   //#endregion Custom methods
 };
