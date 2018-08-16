@@ -1,7 +1,7 @@
 {
-  "name": "p5-cheetos-game",
+  "name": "p5-parcel-game",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/js/game.app.js",
   "author": "TheFrost <frost084@gmail.com>",
   "license": "MIT",
   "scripts": {
