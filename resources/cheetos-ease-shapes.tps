@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>../public/resources/cheetos-ui.png</filename>
+        <filename>../public/resources/shapes1.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -56,7 +56,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
+        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -90,7 +90,7 @@
             <key>width</key>
             <int>2048</int>
             <key>height</key>
-            <int>2048</int>
+            <int>1024</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -132,7 +132,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../public/resources/cheetos-ui.json</filename>
+                <filename>../public/resources/shapes1.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -177,119 +177,249 @@
             <key>defaultPivotPoint</key>
             <point_f>0,0</point_f>
             <key>writePivotPoints</key>
-            <false/>
+            <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">ui/bg.jpg</key>
+            <key type="filename">facil/c.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>90,160,180,320</rect>
+                <rect>60,84,119,167</rect>
                 <key>scale9Paddings</key>
-                <rect>90,160,180,320</rect>
+                <rect>60,84,119,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/brush-cheese.png</key>
+            <key type="filename">facil/chile.png</key>
+            <key type="filename">facil/tabla de surf.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>60,60,120,120</rect>
+                <rect>56,84,113,167</rect>
                 <key>scale9Paddings</key>
-                <rect>60,60,120,120</rect>
+                <rect>56,84,113,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/cheese-boom.png</key>
+            <key type="filename">facil/circulo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,116,233,233</rect>
+                <rect>84,84,168,168</rect>
                 <key>scale9Paddings</key>
-                <rect>116,116,233,233</rect>
+                <rect>84,84,168,168</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/cheese-points.png</key>
+            <key type="filename">facil/cuadrado.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,7,15,13</rect>
+                <rect>84,84,167,167</rect>
                 <key>scale9Paddings</key>
-                <rect>8,7,15,13</rect>
+                <rect>84,84,167,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/clock.png</key>
+            <key type="filename">facil/e.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>10,10,19,20</rect>
+                <rect>55,84,111,167</rect>
                 <key>scale9Paddings</key>
-                <rect>10,10,19,20</rect>
+                <rect>55,84,111,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/hand-pointer.png</key>
+            <key type="filename">facil/h.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>18,12,37,23</rect>
+                <rect>43,84,85,167</rect>
                 <key>scale9Paddings</key>
-                <rect>18,12,37,23</rect>
+                <rect>43,84,85,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/points-bar.png</key>
+            <key type="filename">facil/hexagono.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>42,11,84,22</rect>
+                <rect>84,73,167,145</rect>
                 <key>scale9Paddings</key>
-                <rect>42,11,84,22</rect>
+                <rect>84,73,167,145</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/time-bar-full.png</key>
-            <key type="filename">ui/time-bar.png</key>
+            <key type="filename">facil/lentes.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>59,9,118,18</rect>
+                <rect>84,64,167,127</rect>
                 <key>scale9Paddings</key>
-                <rect>59,9,118,18</rect>
+                <rect>84,64,167,127</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/nota_musical_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>78,84,155,167</rect>
+                <key>scale9Paddings</key>
+                <rect>78,84,155,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/nuve_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,52,167,105</rect>
+                <key>scale9Paddings</key>
+                <rect>84,52,167,105</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/o.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>74,84,149,167</rect>
+                <key>scale9Paddings</key>
+                <rect>74,84,149,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/pentagono.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,80,167,160</rect>
+                <key>scale9Paddings</key>
+                <rect>84,80,167,160</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/rayo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>40,84,79,167</rect>
+                <key>scale9Paddings</key>
+                <rect>40,84,79,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/rectangulo.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>59,84,118,167</rect>
+                <key>scale9Paddings</key>
+                <rect>59,84,118,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/s.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>53,84,105,167</rect>
+                <key>scale9Paddings</key>
+                <rect>53,84,105,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/snap.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,60,167,121</rect>
+                <key>scale9Paddings</key>
+                <rect>84,60,167,121</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/t.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>37,84,75,167</rect>
+                <key>scale9Paddings</key>
+                <rect>37,84,75,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">facil/trapecio.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,56,167,113</rect>
+                <key>scale9Paddings</key>
+                <rect>84,56,167,113</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>ui</filename>
+            <filename>facil</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

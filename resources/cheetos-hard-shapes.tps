@@ -26,7 +26,7 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <false/>
+        <true/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>../public/resources/cheetos-ui.png</filename>
+        <filename>../public/resources/shapes3.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -56,7 +56,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
+        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -88,9 +88,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>2048</int>
+            <int>1024</int>
             <key>height</key>
-            <int>2048</int>
+            <int>1024</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -132,7 +132,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../public/resources/cheetos-ui.json</filename>
+                <filename>../public/resources/shapes3.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -181,115 +181,114 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">ui/bg.jpg</key>
+            <key type="filename">dificil/bicicleta.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>90,160,180,320</rect>
+                <rect>83,67,167,134</rect>
                 <key>scale9Paddings</key>
-                <rect>90,160,180,320</rect>
+                <rect>83,67,167,134</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/brush-cheese.png</key>
+            <key type="filename">dificil/cheetos.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>60,60,120,120</rect>
+                <rect>84,50,167,100</rect>
                 <key>scale9Paddings</key>
-                <rect>60,60,120,120</rect>
+                <rect>84,50,167,100</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/cheese-boom.png</key>
+            <key type="filename">dificil/control.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,116,233,233</rect>
+                <rect>83,67,166,133</rect>
                 <key>scale9Paddings</key>
-                <rect>116,116,233,233</rect>
+                <rect>83,67,166,133</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/cheese-points.png</key>
+            <key type="filename">dificil/football.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,7,15,13</rect>
+                <rect>84,84,167,167</rect>
                 <key>scale9Paddings</key>
-                <rect>8,7,15,13</rect>
+                <rect>84,84,167,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/clock.png</key>
+            <key type="filename">dificil/helado.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>10,10,19,20</rect>
+                <rect>45,84,90,167</rect>
                 <key>scale9Paddings</key>
-                <rect>10,10,19,20</rect>
+                <rect>45,84,90,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/hand-pointer.png</key>
+            <key type="filename">dificil/huellita.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>18,12,37,23</rect>
+                <rect>84,80,167,161</rect>
                 <key>scale9Paddings</key>
-                <rect>18,12,37,23</rect>
+                <rect>84,80,167,161</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/points-bar.png</key>
+            <key type="filename">dificil/logo_sabritas.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>42,11,84,22</rect>
+                <rect>84,83,167,166</rect>
                 <key>scale9Paddings</key>
-                <rect>42,11,84,22</rect>
+                <rect>84,83,167,166</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ui/time-bar-full.png</key>
-            <key type="filename">ui/time-bar.png</key>
+            <key type="filename">dificil/patineta.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>59,9,118,18</rect>
+                <rect>77,84,154,167</rect>
                 <key>scale9Paddings</key>
-                <rect>59,9,118,18</rect>
+                <rect>77,84,154,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>ui</filename>
+            <filename>dificil</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

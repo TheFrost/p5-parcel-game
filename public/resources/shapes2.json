@@ -1,399 +1,142 @@
+{"frames": {
+
+"americano.png":
 {
-  "frames": {
-    "nuve_1.png": {
-      "frame": {
-        "x": 1,
-        "y": 1,
-        "w": 249,
-        "h": 155
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 155
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 155
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "avion.png": {
-      "frame": {
-        "x": 252,
-        "y": 1,
-        "w": 249,
-        "h": 174
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 174
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 174
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "audifonos.png": {
-      "frame": {
-        "x": 503,
-        "y": 1,
-        "w": 249,
-        "h": 199
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 199
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 199
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "hamburguesa.png": {
-      "frame": {
-        "x": 754,
-        "y": 1,
-        "w": 249,
-        "h": 201
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 201
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 201
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "queso.png": {
-      "frame": {
-        "x": 1,
-        "y": 158,
-        "w": 249,
-        "h": 203
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 203
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 203
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "tennis.png": {
-      "frame": {
-        "x": 252,
-        "y": 177,
-        "w": 249,
-        "h": 226
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 226
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 226
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "blanco.png": {
-      "frame": {
-        "x": 503,
-        "y": 202,
-        "w": 249,
-        "h": 248
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 248
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 248
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "arbol.png": {
-      "frame": {
-        "x": 754,
-        "y": 204,
-        "w": 190,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 190,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 190,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "balon_americano.png": {
-      "frame": {
-        "x": 1,
-        "y": 363,
-        "w": 244,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 244,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 244,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "bolsa_papas.png": {
-      "frame": {
-        "x": 247,
-        "y": 405,
-        "w": 212,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 212,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 212,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "elote.png": {
-      "frame": {
-        "x": 461,
-        "y": 452,
-        "w": 241,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 241,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 241,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "foco.png": {
-      "frame": {
-        "x": 704,
-        "y": 455,
-        "w": 164,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 164,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 164,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "guitarra.png": {
-      "frame": {
-        "x": 1,
-        "y": 614,
-        "w": 215,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 215,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 215,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "nota_2.png": {
-      "frame": {
-        "x": 218,
-        "y": 656,
-        "w": 231,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 231,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 231,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "palomitas.png": {
-      "frame": {
-        "x": 451,
-        "y": 703,
-        "w": 185,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 185,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 185,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "soda.png": {
-      "frame": {
-        "x": 638,
-        "y": 706,
-        "w": 188,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 188,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 188,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    }
-  },
-  "meta": {
-    "app": "http://free-tex-packer.com/",
-    "version": "0.3.3",
-    "image": "shapes2.png",
-    "format": "RGBA8888",
-    "size": {
-      "w": 1030,
-      "h": 960
-    },
-    "scale": 1
-  }
+	"frame": {"x":0,"y":608,"w":329,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":329,"h":335},
+	"sourceSize": {"w":329,"h":335}
+},
+"arbol.png":
+{
+	"frame": {"x":582,"y":608,"w":256,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":335},
+	"sourceSize": {"w":256,"h":335}
+},
+"audifonos.png":
+{
+	"frame": {"x":670,"y":0,"w":335,"h":267},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":267},
+	"sourceSize": {"w":335,"h":267}
+},
+"avion.png":
+{
+	"frame": {"x":0,"y":0,"w":335,"h":233},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":233},
+	"sourceSize": {"w":335,"h":233}
+},
+"blanco.png":
+{
+	"frame": {"x":335,"y":273,"w":335,"h":334},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":334},
+	"sourceSize": {"w":335,"h":334}
+},
+"bolsa de papas.png":
+{
+	"frame": {"x":1383,"y":608,"w":285,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":285,"h":335},
+	"sourceSize": {"w":285,"h":335}
+},
+"elote.png":
+{
+	"frame": {"x":838,"y":608,"w":325,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":325,"h":335},
+	"sourceSize": {"w":325,"h":335}
+},
+"foco.png":
+{
+	"frame": {"x":1163,"y":608,"w":220,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":335},
+	"sourceSize": {"w":220,"h":335}
+},
+"guitarra.png":
+{
+	"frame": {"x":1139,"y":273,"w":289,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":289,"h":335},
+	"sourceSize": {"w":289,"h":335}
+},
+"hamburguesa.png":
+{
+	"frame": {"x":1005,"y":0,"w":335,"h":270},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":270},
+	"sourceSize": {"w":335,"h":270}
+},
+"nota_musical_2.png":
+{
+	"frame": {"x":670,"y":273,"w":220,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":335},
+	"sourceSize": {"w":220,"h":335}
+},
+"nuve_1.png":
+{
+	"frame": {"x":335,"y":0,"w":335,"h":237},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":237},
+	"sourceSize": {"w":335,"h":237}
+},
+"palomitas.png":
+{
+	"frame": {"x":890,"y":273,"w":249,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":249,"h":335},
+	"sourceSize": {"w":249,"h":335}
+},
+"queso.png":
+{
+	"frame": {"x":1340,"y":0,"w":335,"h":273},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":273},
+	"sourceSize": {"w":335,"h":273}
+},
+"sneaker.png":
+{
+	"frame": {"x":0,"y":273,"w":335,"h":305},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":305},
+	"sourceSize": {"w":335,"h":305}
+},
+"soda.png":
+{
+	"frame": {"x":329,"y":608,"w":253,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":253,"h":335},
+	"sourceSize": {"w":253,"h":335}
+}},
+"animations": {
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "shapes2.png",
+	"format": "RGBA8888",
+	"size": {"w":1675,"h":943},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cecb3cd5f2be2791916851357cde2a2f:32cb4256823c8ae6fb87081114d80e0d:da280235fbf82d1772aa368dcf1e4a20$"
+}
 }

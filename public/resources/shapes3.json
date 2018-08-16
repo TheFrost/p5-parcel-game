@@ -1,207 +1,76 @@
+{"frames": {
+
+"bicicleta.png":
 {
-  "frames": {
-    "cheetos_logo.png": {
-      "frame": {
-        "x": 1,
-        "y": 1,
-        "w": 249,
-        "h": 149
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 149
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 149
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "control.png": {
-      "frame": {
-        "x": 252,
-        "y": 1,
-        "w": 249,
-        "h": 200
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 200
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 200
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "bicicleta.png": {
-      "frame": {
-        "x": 503,
-        "y": 1,
-        "w": 249,
-        "h": 201
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 201
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 201
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "garra.png": {
-      "frame": {
-        "x": 754,
-        "y": 1,
-        "w": 249,
-        "h": 238
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 238
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 238
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "logo_sabritas.png": {
-      "frame": {
-        "x": 1,
-        "y": 152,
-        "w": 249,
-        "h": 247
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 247
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 247
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "balon_futbol.png": {
-      "frame": {
-        "x": 252,
-        "y": 203,
-        "w": 249,
-        "h": 248
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 249,
-        "h": 248
-      },
-      "sourceSize": {
-        "w": 249,
-        "h": 248
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "helado.png": {
-      "frame": {
-        "x": 503,
-        "y": 204,
-        "w": 133,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 133,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 133,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "tabla.png": {
-      "frame": {
-        "x": 638,
-        "y": 241,
-        "w": 230,
-        "h": 249
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 230,
-        "h": 249
-      },
-      "sourceSize": {
-        "w": 230,
-        "h": 249
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    }
-  },
-  "meta": {
-    "app": "http://free-tex-packer.com/",
-    "version": "0.3.3",
-    "image": "shapes3.png",
-    "format": "RGBA8888",
-    "size": {
-      "w": 1024,
-      "h": 512
-    },
-    "scale": 1
-  }
+	"frame": {"x":0,"y":0,"w":333,"h":268},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":333,"h":268},
+	"sourceSize": {"w":333,"h":268}
+},
+"cheetos.png":
+{
+	"frame": {"x":333,"y":0,"w":335,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":200},
+	"sourceSize": {"w":335,"h":200}
+},
+"control.png":
+{
+	"frame": {"x":0,"y":268,"w":332,"h":267},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":267},
+	"sourceSize": {"w":332,"h":267}
+},
+"football.png":
+{
+	"frame": {"x":332,"y":268,"w":335,"h":334},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":334},
+	"sourceSize": {"w":335,"h":334}
+},
+"helado.png":
+{
+	"frame": {"x":667,"y":268,"w":180,"h":335},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":335},
+	"sourceSize": {"w":180,"h":335}
+},
+"huellita.png":
+{
+	"frame": {"x":0,"y":603,"w":335,"h":321},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":321},
+	"sourceSize": {"w":335,"h":321}
+},
+"logo_sabritas.png":
+{
+	"frame": {"x":335,"y":603,"w":335,"h":332},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":332},
+	"sourceSize": {"w":335,"h":332}
+},
+"patineta.png":
+{
+	"frame": {"x":670,"y":603,"w":308,"h":334},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":308,"h":334},
+	"sourceSize": {"w":308,"h":334}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "shapes3.png",
+	"format": "RGBA8888",
+	"size": {"w":978,"h":937},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e8a3c1b667e3f2ec99c05533ee4d5298:962ba0f03775b5a70f1ddbaa808401bd:7590220b64a9afd34ae24a81aee444fb$"
+}
 }

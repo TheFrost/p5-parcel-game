@@ -26,15 +26,15 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <true/>
+        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>spritesheet-only</string>
+        <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>../public/resources/cheetos-ui.png</filename>
+        <filename>../public/resources/shapes2.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -74,7 +74,7 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>1</uint>
+        <uint>0</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -90,7 +90,7 @@
             <key>width</key>
             <int>2048</int>
             <key>height</key>
-            <int>2048</int>
+            <int>1024</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -102,7 +102,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
@@ -128,7 +128,13 @@
             </struct>
         </struct>
         <key>dataFileNames</key>
-        <map type="GFileNameMap"/>
+        <map type="GFileNameMap">
+            <key>data</key>
+            <struct type="DataFile">
+                <key>name</key>
+                <filename>../public/resources/shapes2.json</filename>
+            </struct>
+        </map>
         <key>multiPack</key>
         <false/>
         <key>forceIdenticalLayout</key>
@@ -163,100 +169,218 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">None</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
             <false/>
             <key>defaultPivotPoint</key>
-            <point_f>0.5,0.5</point_f>
+            <point_f>0,0</point_f>
             <key>writePivotPoints</key>
             <false/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../public/resources/ui/bg.jpg</key>
+            <key type="filename">intermedio/americano.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>90,160,180,320</rect>
+                <rect>82,84,165,167</rect>
                 <key>scale9Paddings</key>
-                <rect>90,160,180,320</rect>
+                <rect>82,84,165,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../public/resources/ui/cheese-points.png</key>
+            <key type="filename">intermedio/arbol.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,7,15,13</rect>
+                <rect>64,84,128,167</rect>
                 <key>scale9Paddings</key>
-                <rect>8,7,15,13</rect>
+                <rect>64,84,128,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../public/resources/ui/clock.png</key>
+            <key type="filename">intermedio/audifonos.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>10,10,19,20</rect>
+                <rect>84,67,167,133</rect>
                 <key>scale9Paddings</key>
-                <rect>10,10,19,20</rect>
+                <rect>84,67,167,133</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../public/resources/ui/hand-pointer.png</key>
+            <key type="filename">intermedio/avion.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>18,12,37,23</rect>
+                <rect>84,58,167,117</rect>
                 <key>scale9Paddings</key>
-                <rect>18,12,37,23</rect>
+                <rect>84,58,167,117</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../public/resources/ui/points-bar.png</key>
+            <key type="filename">intermedio/blanco.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>42,11,84,22</rect>
+                <rect>84,84,167,167</rect>
                 <key>scale9Paddings</key>
-                <rect>42,11,84,22</rect>
+                <rect>84,84,167,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../public/resources/ui/time-bar.png</key>
+            <key type="filename">intermedio/bolsa de papas.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>59,9,118,18</rect>
+                <rect>71,84,143,167</rect>
                 <key>scale9Paddings</key>
-                <rect>59,9,118,18</rect>
+                <rect>71,84,143,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/elote.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>81,84,163,167</rect>
+                <key>scale9Paddings</key>
+                <rect>81,84,163,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/foco.png</key>
+            <key type="filename">intermedio/nota_musical_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>55,84,110,167</rect>
+                <key>scale9Paddings</key>
+                <rect>55,84,110,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/guitarra.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>72,84,145,167</rect>
+                <key>scale9Paddings</key>
+                <rect>72,84,145,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/hamburguesa.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,68,167,135</rect>
+                <key>scale9Paddings</key>
+                <rect>84,68,167,135</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/nuve_1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,59,167,119</rect>
+                <key>scale9Paddings</key>
+                <rect>84,59,167,119</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/palomitas.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>62,84,125,167</rect>
+                <key>scale9Paddings</key>
+                <rect>62,84,125,167</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/queso.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,68,167,137</rect>
+                <key>scale9Paddings</key>
+                <rect>84,68,167,137</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/sneaker.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>84,76,167,153</rect>
+                <key>scale9Paddings</key>
+                <rect>84,76,167,153</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">intermedio/soda.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>63,84,127,167</rect>
+                <key>scale9Paddings</key>
+                <rect>63,84,127,167</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>../public/resources/ui</filename>
+            <filename>intermedio</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
