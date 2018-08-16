@@ -1,6 +1,7 @@
 import { Tween, Easing } from '@tweenjs/tween.js';
 import Sketch from './sketch';
 import store from './store';
+import logger from './log';
 import { 
   distanceBetween, 
   angleBetween, 
@@ -64,18 +65,30 @@ export default class SketchPlayer extends Sketch {
   
   //#region p5.js event handlers
   pointerStart(e) {
+    const { p5 } = this;
+
     e.preventDefault();
     
     const state = store.getState();
     if (state.gameState !== 'PLAY') return;
 
     this.isDrawing = true;
-    this.lastPoint = { x: this.p5.mouseX, y: this.p5.mouseY };
+    this.lastPoint = { x: p5.mouseX, y: p5.mouseY };
+
+    logger.currentInteraction.x0 = this.lastPoint.x;
+    logger.currentInteraction.y0 = this.lastPoint.y;
+    logger.currentInteraction.delta0 = Date.now();
   }
 
   pointerRelease() {
+    const { p5 } = this;
     const state = store.getState();
     if (state.gameState !== 'PLAY') return;
+    
+    logger.currentInteraction.x1 = p5.mouseX;
+    logger.currentInteraction.y1 = p5.mouseY;
+    logger.currentInteraction.delta1 = Date.now();
+    logger.saveInteractionState();
 
     this.isDrawing = false;
     this.validatePixels();
@@ -228,8 +241,6 @@ export default class SketchPlayer extends Sketch {
       this.shapeData.w,
       this.shapeData.h
     );
-
-    this.isRenderingShape = false;
   }
 
   renderBackground() {
@@ -279,6 +290,7 @@ export default class SketchPlayer extends Sketch {
 
   setupPixels() {
     this.completeShapePixels = this.getBlackPixels();
+    logger.currentLog.totalShapePixels = this.completeShapePixels;
   }
 
   validatePixels() {
@@ -294,6 +306,8 @@ export default class SketchPlayer extends Sketch {
       if (state.level === 1 || state.level === 2) {
         store.dispatch({type: 'UP_COMBO_COUNTER'});
       }
+
+      logger.saveLogState();
     }
   }
 
@@ -313,7 +327,7 @@ export default class SketchPlayer extends Sketch {
 
     const state = store.getState();
     this.pubsub.publish('gameOver', {
-      log: 'log',
+      log: logger.log,
       score: state.finalScore
     });
   }

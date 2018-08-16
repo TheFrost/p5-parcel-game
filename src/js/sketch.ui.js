@@ -2,6 +2,7 @@ import Sketch from './sketch';
 import { pad, isMobile } from './utils';
 import store from './store';
 import { Tween, Easing } from '@tweenjs/tween.js';
+import logger from './log';
 
 export default class SketchUI extends Sketch {
   constructor(config) {
@@ -246,7 +247,7 @@ export default class SketchUI extends Sketch {
 
     const state = store.getState();
     this.pubsub.publish('gameOver', {
-      log: 'log',
+      log: logger.log,
       score: state.finalScore
     });
 

@@ -2,6 +2,7 @@ import SketchPlayer from './sketch.player';
 import SketchUI from './sketch.ui';
 import PubSub from './pubsub';
 import store from './store';
+import logger from './log';
 import TWEEN from '@tweenjs/tween.js';
 
 export default class GameApp {
@@ -26,6 +27,8 @@ export default class GameApp {
     });
 
     this.pubsub.publish('startGame');
+
+    logger.currentLog.level = gameLevel;
   }
 
   init() {
