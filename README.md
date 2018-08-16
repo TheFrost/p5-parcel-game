@@ -11,7 +11,7 @@ Después ya pueden crear la instancia del juego, recomiendo lo hagan en una IIFE
     })();
 ## Options
 **Option**|**Type**|**Default**|**description**
-:-----:|:-----:|:-----:|:-----:
+:-----|:-----:|:-----:|:-----
 w|Number|360|Width del canvas en relacion 16/9 Orientacion Portrait
 h|Number|640|Height del canvas en relacion 16/9 Orientacion Portrait
 containerId|String|sketch-wrapper'|Si no pasan un id para seleccionar en el DOM toma por default el document.body y se monta el juego en ese nodo.
