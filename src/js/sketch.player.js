@@ -234,8 +234,8 @@ export default class SketchPlayer extends Sketch {
       this.shapeSprite, 
       this.BASE_WIDTH/2,
       this.BASE_HEIGHT/2,
-      this.shapeData.w * 1.2 * this.shapeTransform.scale,
-      this.shapeData.h * 1.2 * this.shapeTransform.scale,
+      this.shapeData.w * this.shapeTransform.scale,
+      this.shapeData.h * this.shapeTransform.scale,
       this.shapeData.x,
       this.shapeData.y,
       this.shapeData.w,
@@ -315,7 +315,7 @@ export default class SketchPlayer extends Sketch {
     const { buffer } = this;
 
     buffer.loadPixels();
-    return getPixelCounter(buffer.pixels, ({r, g, b, a}) => r+g+b < 30 && a > 0);
+    return getPixelCounter(buffer.pixels, ({r, g, b, a}) => r+g+b === 0 && a === 255);
   }
 
   triggerFinishGame() {

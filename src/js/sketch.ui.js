@@ -28,14 +28,14 @@ export default class SketchUI extends Sketch {
   preload() {
     const { p5 } = this;
 
-    this.spriteMedia = p5.loadImage(`${this.config.resourcesPath}/cheetos-ui.png`);
-    this.tilesetData = p5.loadJSON(`${this.config.resourcesPath}/cheetos-ui.json`);
+    this.spriteMedia = p5.loadImage(`${this.config.resourcesPath}cheetos-ui.png`);
+    this.tilesetData = p5.loadJSON(`${this.config.resourcesPath}cheetos-ui.json`);
 
     // load sprite levels
     for (let i = 1; i < 4; i++) {
       this.spriteLevels.push({
-        sprite: p5.loadImage(`resources/shapes${i}.png`),
-        data: p5.loadJSON(`resources/shapes${i}.json`)
+        sprite: p5.loadImage(`${this.config.resourcesPath}shapes${i}.png`),
+        data: p5.loadJSON(`${this.config.resourcesPath}shapes${i}.json`)
       });
     }
   }
