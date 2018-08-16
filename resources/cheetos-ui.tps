@@ -181,19 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../public/resources/cheese-boom.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>116,116,233,233</rect>
-                <key>scale9Paddings</key>
-                <rect>116,116,233,233</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../public/resources/ui/bg.jpg</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -217,6 +204,19 @@
                 <rect>60,60,120,120</rect>
                 <key>scale9Paddings</key>
                 <rect>60,60,120,120</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../public/resources/ui/cheese-boom.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>116,116,233,233</rect>
+                <key>scale9Paddings</key>
+                <rect>116,116,233,233</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -290,7 +290,6 @@
         <key>fileList</key>
         <array>
             <filename>../public/resources/ui</filename>
-            <filename>../public/resources/cheese-boom.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
