@@ -1,8 +1,10 @@
 import Chart from 'chart.js';
 
 export default class GameChart {
-  constructor(log) {
+  constructor(log, parent) {
     this.log = log;
+    this.parent = typeof parent === 'undefined' ?
+      document.body : document.getElementById(parent); 
 
     this.init();
   }
@@ -15,7 +17,7 @@ export default class GameChart {
   buildCtx() {
     const canvas = document.createElement('canvas');
     canvas.id = 'chart';
-    document.body.appendChild(canvas);
+    this.parent.appendChild(canvas);
     
     this.ctx = document.getElementById('chart').getContext('2d');
   }

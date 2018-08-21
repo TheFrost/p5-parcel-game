@@ -56,6 +56,7 @@ export default class SketchPlayer extends Sketch {
         this.renderUserPlay();
         return;
       case 'GAME_OVER':
+        if (this.isTweeningShape) this.renderScene();
         this.renderBuffer();
         return;
       default: return;
@@ -75,8 +76,6 @@ export default class SketchPlayer extends Sketch {
     this.isDrawing = true;
     this.lastPoint = { x: p5.mouseX, y: p5.mouseY };
 
-    logger.currentInteraction.x0 = this.lastPoint.x;
-    logger.currentInteraction.y0 = this.lastPoint.y;
     logger.currentInteraction.delta0 = Date.now();
   }
 
@@ -85,8 +84,6 @@ export default class SketchPlayer extends Sketch {
     const state = store.getState();
     if (state.gameState !== 'PLAY') return;
     
-    logger.currentInteraction.x1 = p5.mouseX;
-    logger.currentInteraction.y1 = p5.mouseY;
     logger.currentInteraction.delta1 = Date.now();
     logger.saveInteractionState();
 
@@ -294,7 +291,6 @@ export default class SketchPlayer extends Sketch {
 
   setupPixels() {
     this.completeShapePixels = this.getBlackPixels();
-    logger.currentLog.totalShapePixels = this.completeShapePixels;
   }
 
   validatePixels() {

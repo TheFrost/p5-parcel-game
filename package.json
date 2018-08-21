@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "rm -rf .cache/ && parcel src/index.html --global GameApp --no-source-maps -d public/",
-    "start-chart": "rm -rf .cache/ && parcel src/index-chart.html --global GameChart --no-source-maps -d public/",
-    "build": "rm -rf build/ && parcel build src/index.html --global GameApp --no-source-maps -d build/ && cp -R public/resources build/resources"
+    "build": "rm -rf build/ && parcel build src/index.html --global GameApp --no-source-maps -d build/ && cp -R public/resources build/resources",
+    "start:chart": "rm -rf .cache/ && parcel src/index-chart.html --global GameChart --no-source-maps -d public/",
+    "build:chart": "rm -rf build/ && parcel build src/index-chart.html --global GameChart --no-source-maps -d build/"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

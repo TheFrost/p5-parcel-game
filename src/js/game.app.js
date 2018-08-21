@@ -2,7 +2,6 @@ import SketchPlayer from './sketch.player';
 import SketchUI from './sketch.ui';
 import PubSub from './pubsub';
 import store from './store';
-import logger from './log';
 import TWEEN from '@tweenjs/tween.js';
 
 export default class GameApp {
@@ -27,8 +26,6 @@ export default class GameApp {
     });
 
     this.pubsub.publish('startGame');
-
-    logger.currentLog.level = gameLevel;
   }
 
   init() {
@@ -101,8 +98,13 @@ export default class GameApp {
         case 'PLAY':
           this.sketchDraw();
           return;
-        case 'GAME_OVER':
-          this.stopDraw();
+        case 'GAME_OVER':;
+          if (!this.sketchPlayer.isTweeningShape && !this.sketchUi.isTweeningShape) {
+            this.stopDraw();
+          } else {
+            this.sketchDraw();
+          }
+          return;
         default: return;
       }
     }

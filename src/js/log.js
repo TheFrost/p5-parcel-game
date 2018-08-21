@@ -2,15 +2,9 @@ const logger = {
   log: [],
   currentLog: {
     interactions: [],
-    level: 1,
-    totalShapePixels: 0,
-    nameShape: ''
+    shapeName: ''
   },
   currentInteraction: {
-    x0: 0,
-    y0: 0,
-    x1: 0,
-    y1: 0,
     delta0: 0,
     delta1: 0
   },

@@ -8,19 +8,23 @@
 
   <style>
     html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #chart-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
+      min-width: 100vw;
+      min-height: 100vh;
     }
 
     * { box-sizing: border-box }
   </style>
 </head>
 <body>
+  <div id="chart-container"></div>
   
   <script src="js/game.chart.js"></script>
   <script>
@@ -29,7 +33,7 @@
         return res.json();
       })
       .then(function(log) {
-        new GameChart(log);
+        new GameChart(log, 'chart-container');
       });
   </script>
 

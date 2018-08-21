@@ -20,6 +20,7 @@ export default class SketchUI extends Sketch {
     this.currentSecond = 0;
 
     this.spriteLevels = [];
+    this.isTweeningShape = false;
 
     this.init();
   }
@@ -41,9 +42,14 @@ export default class SketchUI extends Sketch {
   }
   
   setup() { 
-    this.p5.noCursor();
+    const { p5, buffer } = this;
+    
+    p5.noCursor();
+    buffer.textFont('Arial');
+
     this.setupAssets();
     this.publishResources();
+
     store.dispatch({type: 'SET_UI_SKETCH_READY'});
   }
 
@@ -83,7 +89,11 @@ export default class SketchUI extends Sketch {
     this.cheeseBoomTween = new Tween(this.cheeseBoomTransform)
       .to({ scale: 3 }, 500)
       .easing(Easing.Quadratic.Out)
-      .onComplete(() => this.cheeseBoomTransform.scale = 0.01);
+      .onStart(() => this.isTweeningShape = true)
+      .onComplete(() => {
+        this.cheeseBoomTransform.scale = 0.01;
+        this.isTweeningShape = false;
+      });
 
     // clock timeline ----------------------------
     this.clockTransform = { scale: 1 };

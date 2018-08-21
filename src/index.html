@@ -61,9 +61,6 @@
   </style>
 </head>
 <body>
-  <div class="download-overlay">
-    <a href="#" id="link">Descargar LOG de juego en JSON</a>
-  </div>
   <div id="sketch-wrapper"></div>
 
   <script src="js/game.app.js"></script>
@@ -75,7 +72,7 @@
       containerId: 'sketch-wrapper',
       mobilePointer: true,
       resourcesPath: 'resources/',
-      timeLimit: 60,
+      timeLimit: 10,
       minLimitDrawDesk: 80,
       minLimitDrawMob: 90,
       brushSizeDesk: 13,
@@ -97,15 +94,6 @@
       console.log({score});
       console.log({log});
       console.log('-----------------');
-
-      /* dowunload file like build */
-      var link = document.getElementById('link');
-      var overlay = document.querySelector('.download-overlay');
-      var data = 'data:text/json;charset=utf-8,' + window.encodeURIComponent(JSON.stringify(log));
-
-      link.setAttribute('href', data);
-      link.setAttribute('download', 'log.json');
-      overlay.style.display = 'flex';
     });
 
   </script>
