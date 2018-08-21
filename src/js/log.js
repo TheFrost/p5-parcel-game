@@ -3,7 +3,8 @@ const logger = {
   currentLog: {
     interactions: [],
     level: 1,
-    totalShapePixels: 0
+    totalShapePixels: 0,
+    nameShape: ''
   },
   currentInteraction: {
     x0: 0,

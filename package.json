@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "rm -rf .cache/ && parcel src/index.html --global GameApp --no-source-maps -d public/",
+    "start-chart": "rm -rf .cache/ && parcel src/index-chart.html --global GameChart --no-source-maps -d public/",
     "build": "rm -rf build/ && parcel build src/index.html --global GameApp --no-source-maps -d build/ && cp -R public/resources build/resources"
   },
   "devDependencies": {
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
+    "chart.js": "^2.7.2",
     "p5": "^0.6.1"
   }
 }

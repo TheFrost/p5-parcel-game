@@ -268,7 +268,7 @@ export default class SketchPlayer extends Sketch {
 
     const { p5 } = this;
     const state = store.getState();
-    let index, level;
+    let index, level, shapeName;
 
     // if level 1 or 2 and combo 5 override index and shape query to next level
     if (
@@ -278,14 +278,18 @@ export default class SketchPlayer extends Sketch {
     ) {
       level = state.level + 1;
       index = Math.ceil(p5.random(this.nextLevelKeys.length - 1));
+      shapeName = this.nextLevelKeys.splice(index, 1)[0];
       this.shapeSprite = this[`spriteLevel${level}`].sprite;
-      this.shapeData = this[`spriteLevel${level}`].data.frames[this.nextLevelKeys.pop(index)].frame;
+      this.shapeData = this[`spriteLevel${level}`].data.frames[shapeName].frame;
     } else {
       level = state.level;
       index = Math.ceil(p5.random(this.currentLevelKeys.length - 1));
+      shapeName = this.currentLevelKeys.splice(index, 1)[0];
       this.shapeSprite = this[`spriteLevel${level}`].sprite;
-      this.shapeData = this[`spriteLevel${level}`].data.frames[this.currentLevelKeys.splice(index, 1)].frame;
+      this.shapeData = this[`spriteLevel${level}`].data.frames[shapeName].frame;
     }
+
+    logger.currentLog.shapeName = shapeName;
   }
 
   setupPixels() {
