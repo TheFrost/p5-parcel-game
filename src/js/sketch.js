@@ -60,7 +60,7 @@ export default class Sketch {
     } 
 
     this.windowResize();
-
+    this.preventDefaultOnCanvas();
     this.setup();
   }
   
@@ -76,6 +76,13 @@ export default class Sketch {
 
     this.GAME_WIDTH = Math.ceil(this.BASE_WIDTH * this.GAME_SCALE);
     this.GAME_HEIGHT = Math.ceil(this.BASE_HEIGHT * this.GAME_SCALE);
+  }
+
+  preventDefaultOnCanvas() {
+    this.canvas.touchStarted(e => e.preventDefault());
+    this.canvas.touchEnded(e => e.preventDefault());
+    this.canvas.mousePressed(e => e.preventDefault());
+    this.canvas.mouseReleased(e => e.preventDefault());
   }
   
   pointerStart() {}

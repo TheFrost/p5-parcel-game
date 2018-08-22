@@ -64,10 +64,8 @@ export default class SketchPlayer extends Sketch {
   //#endregion p5.js main methods
   
   //#region p5.js event handlers
-  pointerStart(e) {
+  pointerStart() {
     const { p5 } = this;
-
-    e.preventDefault();
     
     const state = store.getState();
     if (state.gameState !== 'PLAY') return;
@@ -106,6 +104,8 @@ export default class SketchPlayer extends Sketch {
   bindEvents() {
     this.pubsub.suscribe('resourcesReady', this.setupAssets, this);
     this.pubsub.suscribe('startGame', this.onStartGame, this);
+    this.pubsub.suscribe('pointerStart', this.pointerStart, this);
+    this.pubsub.suscribe('pointerRelease', this.pointerRelease, this);
   }
 
   onStartGame() {

@@ -130,7 +130,7 @@ export default class SketchUI extends Sketch {
   bindEvents() {
     this.pubsub.suscribe('completedDraw', this.onCompleteDraw, this);
     this.pubsub.suscribe('startGame', this.onStartGame, this);
-    this.pubsub.suscribe('cheeseBoom', this.triggerCheeseBoom, this);
+    // this.pubsub.suscribe('cheeseBoom', this.triggerCheeseBoom, this);
   }
 
   triggerCheeseBoom() {

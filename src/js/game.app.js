@@ -89,9 +89,8 @@ export default class GameApp {
   
   draw() {
     this.requestId = window.requestAnimationFrame(this.draw.bind(this));
-
     TWEEN.update();
-    
+
     const state = store.getState();
     if (state.playerSketchReady && state.uiSketchReady) {
       switch(state.gameState) {
